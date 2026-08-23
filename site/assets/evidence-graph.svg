@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" role="img" aria-labelledby="title desc">
+  <title id="title">Copyright Forge evidence graph</title>
+  <desc id="desc">A diagram showing project evidence flowing into a software profile and validated registration materials.</desc>
+  <rect width="960" height="640" fill="#edf1ee"/>
+  <g fill="none" stroke="#638475" stroke-width="2">
+    <path d="M232 152C340 152 357 259 460 259"/><path d="M232 320C340 320 357 292 460 292"/><path d="M232 488C340 488 357 325 460 325"/><path d="M591 292H742"/>
+  </g>
+  <g fill="#fbfcfa" stroke="#253b35" stroke-width="2">
+    <rect x="64" y="95" width="168" height="114" rx="2"/><rect x="64" y="263" width="168" height="114" rx="2"/><rect x="64" y="431" width="168" height="114" rx="2"/>
+    <rect x="460" y="216" width="131" height="151" rx="2"/><rect x="742" y="216" width="155" height="151" rx="2"/>
+  </g>
+  <g fill="#253b35" font-family="Georgia, serif">
+    <text x="88" y="135" font-size="18">SOURCE CODE</text><text x="88" y="163" font-size="14">routes · services</text><text x="88" y="183" font-size="14">models · pages</text>
+    <text x="88" y="303" font-size="18">PROJECT DOCS</text><text x="88" y="331" font-size="14">readme · manuals</text><text x="88" y="351" font-size="14">real screenshots</text>
+    <text x="88" y="471" font-size="18">APPLICANT FACTS</text><text x="88" y="499" font-size="14">owner · dates</text><text x="88" y="519" font-size="14">publication status</text>
+    <text x="482" y="267" font-size="16">SOFTWARE</text><text x="482" y="290" font-size="16">PROFILE</text><text x="482" y="322" font-size="13">one source</text><text x="482" y="341" font-size="13">of truth</text>
+    <text x="763" y="267" font-size="16">VALIDATED</text><text x="763" y="290" font-size="16">DRAFTS</text><text x="763" y="322" font-size="13">documents</text><text x="763" y="341" font-size="13">source material</text>
+  </g>
+  <g fill="#d08b4c"><circle cx="460" cy="259" r="5"/><circle cx="460" cy="292" r="5"/><circle cx="460" cy="325" r="5"/><circle cx="591" cy="292" r="5"/></g>
+</svg>

@@ -9,6 +9,8 @@ Copyright Forge 是一款面向中国软件著作权登记申请的 AI Agent Ski
 它的目标不是“代写一套看似完整的材料”，而是让每项内容都能回到项目代码或申请人确认
 的事实。
 
+项目站点：[rodert.github.io/copyright-forge-skill](https://rodert.github.io/copyright-forge-skill/)
+
 ## 直接交给 Agent
 
 复制以下内容，发送给你的 AI Agent：
