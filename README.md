@@ -1,80 +1,88 @@
 # Copyright Forge Skill
 
-> 基于真实项目，为中国软件著作权登记准备可核验的材料初稿。
+> 为中国软件著作权登记准备基于真实项目证据的材料初稿。
 
-Copyright Forge Skill 是一款面向中国软件著作权登记申请的 AI Agent Skill。它从
-真实项目代码中提取证据，协助准备软件说明书、源程序鉴别材料、申请信息填报稿和
-校验报告。
+[简体中文](README.md) | [English](docs/README.en.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [Русский](docs/README.ru.md) | [Français](docs/README.fr.md)
+
+Copyright Forge 是一款面向中国软件著作权登记申请的 AI Agent Skill。它从真实项目中
+提取可追溯证据，统一软件信息，并协助准备说明书、源程序鉴别材料与申请信息填报稿。
+它的目标不是“代写一套看似完整的材料”，而是让每项内容都能回到项目代码或申请人确认
+的事实。
+
+## 直接交给 Agent
+
+复制以下内容，发送给你的 AI Agent：
+
+```text
+请从 https://github.com/Rodert/copyright-forge-skill 安装并使用 Copyright Forge Skill。
+
+安装后，请读取 skills/copyright-forge/SKILL.md，并按其中的流程为我的真实软件项目准备中国软件著作权登记材料初稿。
+
+开始准备材料前：每天首次使用时检查该 Skill 的上游 Git 更新；若发现更新且本地工作区干净，先以 fast-forward 方式更新再继续。无更新时无需提示；更新检查失败或本地改动阻塞更新时，说明原因并停止本次材料准备，绝不覆盖本地改动。
+
+仅基于真实项目与我确认的事实工作：不得虚构功能、源代码、截图、著作权归属、开发关系、发表事实或日期；不得修改原始项目；不得伪造官方申请表或承诺登记结果。将所有输出写入项目目录外的独立输出目录，并明确标记需要我确认的字段。
+```
+
+## 核心能力
+
+| 能力 | 说明 |
+| --- | --- |
+| 项目理解 | 扫描 Go、Java、Python、Node.js、Vue、React 项目的结构、技术栈与源文件。 |
+| 证据映射 | 将候选功能关联到源代码、路由、模型或页面路径，避免无依据的功能描述。 |
+| 统一事实源 | 通过 `software-profile.yaml` 统一软件名称、版本与申请事实，防止材料之间不一致。 |
+| 源程序准备 | 为普通交存生成确定性的源程序选择清单，供人工复核和后续排版。 |
+| 安全处理 | 检测潜在密钥与敏感内容，只在生成副本中脱敏，绝不改写原项目。 |
+| 交付校验 | 校验软件信息、材料一致性与最终状态，区分阻塞项、警告和待确认事项。 |
+
+## 工作流
 
 ```text
 真实项目
   -> 项目扫描
   -> 功能证据映射
-  -> 统一软件信息档案
+  -> 软件信息确认
   -> 说明书 / 源程序材料 / 填报信息
   -> 一致性与安全校验
 ```
 
-## 能做什么
+1. **扫描与取证**：识别项目结构、技术栈和可佐证功能的代码路径。
+2. **确认软件信息**：由申请人确认著作权人、开发方式、完成日期、发表状态等法律事实。
+3. **准备材料初稿**：所有软件名称和版本均读取同一份 `software-profile.yaml`。
+4. **执行校验**：确认功能有证据、材料身份一致，并复查生成副本中的敏感信息。
 
-- 扫描 Go、Java、Python、Node.js、Vue、React 项目的技术栈与源文件。
-- 建立功能与代码路径的证据映射，减少无依据的功能描述。
-- 使用 `software-profile.yaml` 统一软件名称、版本和申请事实，避免材料间不一致。
-- 生成面向普通交存的确定性源程序选择清单。
-- 检测潜在密钥并只在生成副本中脱敏，原始项目保持不变。
-- 输出软件信息、材料一致性和最终状态校验报告。
+## 使用方式
 
-## 不做什么
+Skill 入口位于 [skills/copyright-forge/SKILL.md](skills/copyright-forge/SKILL.md)。辅助脚本
+需要 Python 3.10+，仅使用标准库，且不会修改待分析项目。建议将输出目录放在项目之外：
 
-- 不提交登记申请，也不生成、伪造或修改官方申请表。
-- 不虚构功能、源代码、截图、著作权归属、开发关系或发表事实。
-- 不将 Git 时间或 AI 推断当作申请事实；这些内容必须由申请人确认。
-- 不修改待分析项目，不承诺登记申请一定通过。
+```bash
+SKILL=skills/copyright-forge
+OUT=/tmp/copyright-forge-output
 
-## 工作方式
+mkdir -p "$OUT"
+python3 "$SKILL/scripts/scan_project.py" /path/to/project --output "$OUT/project-scan.json"
+python3 "$SKILL/scripts/build_evidence_map.py" /path/to/project --output "$OUT/evidence-map.json"
+python3 "$SKILL/scripts/collect_source.py" /path/to/project --output "$OUT/source-manifest.json"
+```
 
-1. **扫描项目**：识别项目结构、语言、框架和候选源文件。
-2. **建立证据**：为候选功能记录对应的源代码、路由、模型或页面路径。
-3. **确认软件信息**：由申请人确认著作权人、开发方式、完成日期、发表状态等事实。
-4. **生成并校验**：根据统一档案准备材料初稿，检查名称、版本、证据与敏感信息。
+随后复制 [软件信息模板](skills/copyright-forge/assets/templates/software-profile.yaml) 到输出
+目录，补充并确认申请人专属事实，再执行：
 
-## 快速开始
+```bash
+python3 "$SKILL/scripts/validate_profile.py" "$OUT/software-profile.yaml" \
+  --output "$OUT/profile-validation.json"
+```
 
-要求：Python 3.10+。所有脚本只使用标准库；建议将输出目录放在待分析项目之外。
+## 可信边界
 
-1. 扫描项目并生成基础材料：
+- 不提交登记申请，不生成、伪造或改写官方申请表。
+- 不虚构功能、源代码、截图、著作权归属、开发关系、发表事实或日期。
+- 不将 Git 时间或 AI 推断作为已确认的申请事实。
+- 不修改待分析项目，不覆盖本地改动，不承诺登记申请一定通过。
 
-   ```bash
-   SKILL=skills/copyright-forge
-   OUT=/tmp/copyright-forge-output
-
-   mkdir -p "$OUT"
-   python3 "$SKILL/scripts/scan_project.py" /path/to/project --output "$OUT/project-scan.json"
-   python3 "$SKILL/scripts/build_evidence_map.py" /path/to/project --output "$OUT/evidence-map.json"
-   python3 "$SKILL/scripts/collect_source.py" /path/to/project --output "$OUT/source-manifest.json"
-   ```
-
-2. 将 [软件信息模板](skills/copyright-forge/assets/templates/software-profile.yaml)复制到
-   输出目录，填写并确认申请人专属事实。
-
-3. 校验软件信息：
-
-   ```bash
-   python3 "$SKILL/scripts/validate_profile.py" "$OUT/software-profile.yaml" \
-     --output "$OUT/profile-validation.json"
-   ```
-
-4. 使用 [SKILL.md](skills/copyright-forge/SKILL.md) 指引 Agent 生成材料；提交前按官方
-   渠道的最新要求复核。
-
-## 每日更新检查
-
-首次准备材料时，Skill 会在当天第一次使用前检查上游 Git 更新；当天后续请求不重复
-检查。发现更新且本地工作区干净时，会先以 fast-forward 方式拉取最新版本再继续。
-
-没有更新时保持静默。本地存在改动导致无法更新、不是 Git 检出，或检查/拉取失败时，
-Skill 会说明原因并停止本次材料准备，绝不会覆盖本地改动。这项检查由
-[SKILL.md](skills/copyright-forge/SKILL.md) 中的工作流约束执行。
+当前版本支持**普通交存**。例外交存、合作开发、委托开发、继承或受让、修改他人软件
+等情况会被标记为需要人工复核，而不会被强行自动化处理。提交前请以适用官方渠道的最新
+要求为准。
 
 ## 项目结构
 
@@ -87,23 +95,9 @@ skills/copyright-forge/
   scripts/            扫描、证据、源程序、脱敏与校验脚本
 ```
 
-完整架构说明见 [docs/architecture.md](docs/architecture.md)，支持范围见
-[docs/supported-projects.md](docs/supported-projects.md)。
-
-## 适用范围
-
-第一版支持普通交存流程。例外交存、合作开发、委托开发、继承或受让、修改他人软件
-等情形会被标记为需要人工复核，不会强行自动化处理。
-
-规则仅用于材料准备和校验。提交前请通过适用的官方登记渠道确认当前要求和申请事实。
-
-## English
-
-Copyright Forge Skill prepares evidence-backed draft materials for Chinese
-software copyright registration from real projects. It analyzes projects, maps
-features to evidence, uses one canonical software profile, and validates source
-materials and likely secrets. It does not submit applications, determine legal
-facts, alter official forms, modify source projects, or guarantee approval.
+完整架构见 [docs/architecture.md](docs/architecture.md)，支持范围见
+[docs/supported-projects.md](docs/supported-projects.md)，规则版本见
+[docs/rules-versioning.md](docs/rules-versioning.md)。
 
 ## 开源许可
 
