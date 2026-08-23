@@ -67,6 +67,15 @@ Copyright Forge Skill 是一款面向中国软件著作权登记申请的 AI Age
 4. 使用 [SKILL.md](skills/copyright-forge/SKILL.md) 指引 Agent 生成材料；提交前按官方
    渠道的最新要求复核。
 
+## 每日更新检查
+
+首次准备材料时，Skill 会在当天第一次使用前检查上游 Git 更新；当天后续请求不重复
+检查。发现更新且本地工作区干净时，会先以 fast-forward 方式拉取最新版本再继续。
+
+没有更新时保持静默。本地存在改动导致无法更新、不是 Git 检出，或检查/拉取失败时，
+Skill 会说明原因并停止本次材料准备，绝不会覆盖本地改动。这项检查由
+[SKILL.md](skills/copyright-forge/SKILL.md) 中的工作流约束执行。
+
 ## 项目结构
 
 ```text

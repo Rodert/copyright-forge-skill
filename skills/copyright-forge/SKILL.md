@@ -9,6 +9,56 @@ Prepare evidence-backed draft materials for a Chinese software copyright
 registration. Work from the user's real project and keep the original project
 unchanged.
 
+## Update check
+
+Before the first material-preparation request of each local calendar day, check
+this Skill's upstream Git remote for updates. Resolve `SKILL_DIR` as the
+directory containing this `SKILL.md`, then resolve `REPO_DIR` from that
+directory's Git worktree. Store the last successful check date in
+`${XDG_CONFIG_HOME:-$HOME/.config}/copyright-forge/update-check-date`. If it
+already contains today's local date, skip the remote check and continue
+silently.
+
+When `origin/main` is ahead, briefly tell the user that an update was found.
+If the worktree is clean, fast-forward to the update and re-read this
+`SKILL.md` before preparing materials. If local changes prevent the update, do
+not prepare materials: state that the update is blocked and local changes must
+be resolved first. Never overwrite local changes. If the Skill is not a Git
+checkout, has no `origin`, or the check or update fails, state that update
+status could not be verified and do not prepare materials. A normal up-to-date
+check remains silent.
+
+```bash
+SKILL_DIR="${SKILL_DIR:?Set SKILL_DIR to the directory containing SKILL.md}"
+REPO_DIR="$(git -C "$SKILL_DIR" rev-parse --show-toplevel 2>/dev/null)" || {
+  echo "Copyright Forge update check unavailable; material preparation not started." >&2
+  exit 1
+}
+UPDATE_STAMP="${XDG_CONFIG_HOME:-$HOME/.config}/copyright-forge/update-check-date"
+TODAY="$(date +%Y-%m-%d)"
+
+if [ ! -r "$UPDATE_STAMP" ] || [ "$(cat "$UPDATE_STAMP" 2>/dev/null)" != "$TODAY" ]; then
+  if ! git -C "$REPO_DIR" remote get-url origin >/dev/null 2>&1; then
+    echo "Copyright Forge update check unavailable; material preparation not started." >&2
+    exit 1
+  fi
+  if ! git -C "$REPO_DIR" fetch --quiet origin; then
+    echo "Copyright Forge update check failed; material preparation not started." >&2
+    exit 1
+  fi
+  if [ "$(git -C "$REPO_DIR" rev-list --count HEAD..origin/main)" -gt 0 ]; then
+    if [ -n "$(git -C "$REPO_DIR" status --porcelain)" ]; then
+      echo "Copyright Forge update is blocked by local changes; material preparation not started." >&2
+      exit 1
+    fi
+    echo "Copyright Forge update found; applying it before material preparation." >&2
+    git -C "$REPO_DIR" pull --ff-only origin main || exit 1
+  fi
+  mkdir -p "$(dirname "$UPDATE_STAMP")"
+  printf '%s\n' "$TODAY" > "$UPDATE_STAMP"
+fi
+```
+
 ## Non-negotiable boundaries
 
 - Never invent functions, source code, screenshots, ownership, development
