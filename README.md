@@ -1,47 +1,85 @@
 # Copyright Forge Skill
 
-Copyright Forge Skill 是一款面向中国软件著作权登记申请的 AI Agent Skill。
-它基于真实软件项目，协助准备软件说明书、源程序鉴别材料、申请信息填报稿及
-相关校验报告。
+> 基于真实项目，为中国软件著作权登记准备可核验的材料初稿。
 
-它会分析项目、为功能描述保留代码证据、建立统一的软件信息档案，并在交付前检查
-材料一致性和潜在敏感信息。
+Copyright Forge Skill 是一款面向中国软件著作权登记申请的 AI Agent Skill。它从
+真实项目代码中提取证据，协助准备软件说明书、源程序鉴别材料、申请信息填报稿和
+校验报告。
 
-本项目不会提交申请、伪造或修改官方申请表、修改原始项目、虚构软件功能或权利事实，
-也不保证登记申请一定通过。
+```text
+真实项目
+  -> 项目扫描
+  -> 功能证据映射
+  -> 统一软件信息档案
+  -> 说明书 / 源程序材料 / 填报信息
+  -> 一致性与安全校验
+```
 
-## 已包含能力
+## 能做什么
 
-- 支持 Go、Java、Python、Node.js、Vue、React 项目的结构与技术栈扫描。
-- 以证据为先的功能映射，避免说明书出现无代码依据的功能。
-- 以 `software-profile.yaml` 作为所有材料唯一的软件名称、版本和事实来源。
-- 面向普通交存的确定性源程序选择清单。
-- 仅对生成副本进行敏感信息检测与脱敏，不改动原始代码。
-- 软件信息、材料一致性和最终输出的校验报告。
+- 扫描 Go、Java、Python、Node.js、Vue、React 项目的技术栈与源文件。
+- 建立功能与代码路径的证据映射，减少无依据的功能描述。
+- 使用 `software-profile.yaml` 统一软件名称、版本和申请事实，避免材料间不一致。
+- 生成面向普通交存的确定性源程序选择清单。
+- 检测潜在密钥并只在生成副本中脱敏，原始项目保持不变。
+- 输出软件信息、材料一致性和最终状态校验报告。
 
-## 目录
+## 不做什么
 
-可分发的 Skill 位于 [skills/copyright-forge](skills/copyright-forge)，入口是
-[SKILL.md](skills/copyright-forge/SKILL.md)。规则、模板、Schema 和辅助脚本均在
-该目录内。
+- 不提交登记申请，也不生成、伪造或修改官方申请表。
+- 不虚构功能、源代码、截图、著作权归属、开发关系或发表事实。
+- 不将 Git 时间或 AI 推断当作申请事实；这些内容必须由申请人确认。
+- 不修改待分析项目，不承诺登记申请一定通过。
+
+## 工作方式
+
+1. **扫描项目**：识别项目结构、语言、框架和候选源文件。
+2. **建立证据**：为候选功能记录对应的源代码、路由、模型或页面路径。
+3. **确认软件信息**：由申请人确认著作权人、开发方式、完成日期、发表状态等事实。
+4. **生成并校验**：根据统一档案准备材料初稿，检查名称、版本、证据与敏感信息。
 
 ## 快速开始
 
-辅助脚本要求 Python 3.10+，仅使用标准库，且不会修改待分析的项目。请将输出目录
-放在项目目录之外：
+要求：Python 3.10+。所有脚本只使用标准库；建议将输出目录放在待分析项目之外。
 
-```bash
-SKILL=skills/copyright-forge
-OUT=/tmp/copyright-forge-output
+1. 扫描项目并生成基础材料：
 
-python3 "$SKILL/scripts/scan_project.py" /path/to/project --output "$OUT/project-scan.json"
-python3 "$SKILL/scripts/build_evidence_map.py" /path/to/project --output "$OUT/evidence-map.json"
-python3 "$SKILL/scripts/collect_source.py" /path/to/project --output "$OUT/source-manifest.json"
+   ```bash
+   SKILL=skills/copyright-forge
+   OUT=/tmp/copyright-forge-output
+
+   mkdir -p "$OUT"
+   python3 "$SKILL/scripts/scan_project.py" /path/to/project --output "$OUT/project-scan.json"
+   python3 "$SKILL/scripts/build_evidence_map.py" /path/to/project --output "$OUT/evidence-map.json"
+   python3 "$SKILL/scripts/collect_source.py" /path/to/project --output "$OUT/source-manifest.json"
+   ```
+
+2. 将 [软件信息模板](skills/copyright-forge/assets/templates/software-profile.yaml)复制到
+   输出目录，填写并确认申请人专属事实。
+
+3. 校验软件信息：
+
+   ```bash
+   python3 "$SKILL/scripts/validate_profile.py" "$OUT/software-profile.yaml" \
+     --output "$OUT/profile-validation.json"
+   ```
+
+4. 使用 [SKILL.md](skills/copyright-forge/SKILL.md) 指引 Agent 生成材料；提交前按官方
+   渠道的最新要求复核。
+
+## 项目结构
+
+```text
+skills/copyright-forge/
+  SKILL.md            Skill 入口与工作流
+  references/         规则、边界与材料要求
+  assets/templates/   软件信息和文档模板
+  assets/schemas/     JSON Schema
+  scripts/            扫描、证据、源程序、脱敏与校验脚本
 ```
 
-将软件信息模板复制到输出目录后，确认著作权人、开发方式、完成日期、发表状态等
-只能由申请人确认的字段，再运行 `validate_profile.py`。生成的 JSON 是审核材料，
-不是已完成的登记申请。
+完整架构说明见 [docs/architecture.md](docs/architecture.md)，支持范围见
+[docs/supported-projects.md](docs/supported-projects.md)。
 
 ## 适用范围
 
@@ -53,10 +91,10 @@ python3 "$SKILL/scripts/collect_source.py" /path/to/project --output "$OUT/sourc
 ## English
 
 Copyright Forge Skill prepares evidence-backed draft materials for Chinese
-software copyright registration from real projects. It supports project
-analysis, a canonical software profile, source-manifest generation, redaction,
-and validation. It does not submit applications, determine ownership, alter
-official forms, modify source projects, or guarantee approval.
+software copyright registration from real projects. It analyzes projects, maps
+features to evidence, uses one canonical software profile, and validates source
+materials and likely secrets. It does not submit applications, determine legal
+facts, alter official forms, modify source projects, or guarantee approval.
 
 ## 开源许可
 
