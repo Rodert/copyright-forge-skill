@@ -1,0 +1,28 @@
+schema_version: "1.0"
+software:
+  full_name: ""
+  short_name: ""
+  version: "V1.0"
+copyright:
+  owner:
+    value: ""
+    status: requires_confirmation
+  development_method:
+    value: ""
+    status: requires_confirmation
+  rights_acquisition:
+    value: ""
+    status: requires_confirmation
+  completion_date:
+    value: ""
+    status: requires_confirmation
+  publication_status:
+    value: ""
+    status: requires_confirmation
+project:
+  languages: []
+  frameworks: []
+  databases: []
+features: []
+status:
+  profile_confirmed: false

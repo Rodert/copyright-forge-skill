@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["project", "features"],
+  "properties": {
+    "project": {"type": "string"},
+    "features": {"type": "array"}
+  }
+}

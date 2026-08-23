@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Copyright Forge Software Profile",
+  "type": "object",
+  "required": ["schema_version", "software", "copyright", "status"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "software": {
+      "type": "object",
+      "required": ["full_name", "version"],
+      "properties": {
+        "full_name": {"type": "string", "minLength": 1},
+        "short_name": {"type": "string"},
+        "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "copyright": {"type": "object"},
+    "features": {"type": "array"},
+    "status": {"type": "object"}
+  }
+}
