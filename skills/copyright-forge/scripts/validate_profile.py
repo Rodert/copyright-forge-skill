@@ -7,7 +7,20 @@ from pathlib import Path
 
 from common import load_profile, write_json
 
-USER_ONLY = ("owner", "development_method", "rights_acquisition", "completion_date", "publication_status")
+USER_ONLY = (
+    ("applicant", None),
+    ("copyright", "development_method"),
+    ("copyright", "rights_acquisition"),
+    ("dates", "completion_date"),
+    ("dates", "publication_status"),
+)
+
+
+def resolved_entry(profile: dict, group: str, field: str | None) -> dict:
+    entry = profile.get(group, {})
+    entry = entry.get(field, {}) if field else entry
+    # Version 1 profile compatibility: fields were nested under copyright.
+    return entry if isinstance(entry, dict) else {}
 
 
 def main() -> None:
@@ -19,13 +32,15 @@ def main() -> None:
     blockers, warnings = [], []
     software = profile.get("software", {})
     for field in ("full_name", "version"):
-        if not str(software.get(field, "")).strip():
+        entry = resolved_entry(profile, "software", field)
+        value = entry.get("value", software.get(field, ""))
+        if not str(value).strip():
             blockers.append({"code": "PROFILE_REQUIRED", "field": f"software.{field}", "message": "Required software identity is missing."})
-    copyright = profile.get("copyright", {})
-    for field in USER_ONLY:
-        value = copyright.get(field, {})
-        if not isinstance(value, dict) or value.get("status") != "confirmed" or not str(value.get("value", "")).strip():
-            blockers.append({"code": "CONFIRMATION_REQUIRED", "field": f"copyright.{field}", "message": "User-only fact must be confirmed."})
+    for group, field in USER_ONLY:
+        entry = resolved_entry(profile, group, field)
+        label = f"{group}.{field}" if field else group
+        if entry.get("status") != "confirmed" or not str(entry.get("value", "")).strip():
+            blockers.append({"code": "CONFIRMATION_REQUIRED", "field": label, "message": "User-only fact must be confirmed."})
     if profile.get("status", {}).get("profile_confirmed") is not True:
         warnings.append({"code": "PROFILE_NOT_CONFIRMED", "message": "Profile confirmation flag is not true."})
     write_json(args.output, {"status": "READY" if not blockers else "NEEDS_CONFIRMATION", "blockers": blockers, "warnings": warnings, "info": [{"rules_version": "2026.08"}]})

@@ -1,40 +1,38 @@
 # Copyright Forge Skill
 
-> 为中国软件著作权登记准备基于真实项目证据的材料初稿。
+> 面向中国软件著作权登记的证据驱动 Agent Skill。
 
 [简体中文](README.md) | [English](docs/README.en.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [Русский](docs/README.ru.md) | [Français](docs/README.fr.md)
 
-Copyright Forge 是一款面向中国软件著作权登记申请的 AI Agent Skill。它从真实项目中
-提取可追溯证据，统一软件信息，并协助准备说明书、源程序鉴别材料与申请信息填报稿。
-它的目标不是“代写一套看似完整的材料”，而是让每项内容都能回到项目代码或申请人确认
-的事实。
+你不需要学习软著流程，也不需要填写一长串专业字段。打开自己的代码项目后，直接对 Agent 说：
+
+```text
+帮我给这个项目做一套软著材料。
+```
+
+Copyright Forge 会先理解项目和代码，再整理有证据的功能，只把必须由你确认的真实事实用普通人语言一次问清。它会在生成后再独立检查材料的一致性、功能证据和敏感信息。
 
 项目站点：[rodert.github.io/copyright-forge-skill](https://rodert.github.io/copyright-forge-skill/)
 
 ## 直接交给 Agent
 
-复制以下内容，发送给你的 AI Agent：
+复制下面文字并发送给你的 Agent，即可让它安装并使用本 Skill：
 
 ```text
-请从 https://github.com/Rodert/copyright-forge-skill 安装并使用 Copyright Forge Skill。
+请从 https://github.com/Rodert/copyright-forge-skill 安装 Copyright Forge Skill，并按其 SKILL.md 工作。
 
-安装后，请读取 skills/copyright-forge/SKILL.md，并按其中的流程为我的真实软件项目准备中国软件著作权登记材料初稿。
+我会在真实项目中用自然语言说明需求，例如“帮我给这个项目做软著”或“继续完成刚才的软著材料”。请先自行分析项目、文档、配置和代码，建立可追溯的功能证据；不要一开始向我索要申请字段。只把无法从项目确定的权属、开发关系、真实日期和公开使用事实，用普通人语言集中向我确认。
 
-开始准备材料前：每天首次使用时检查该 Skill 的上游 Git 更新；若发现更新且本地工作区干净，先以 fast-forward 方式更新再继续。无更新时无需提示；更新检查失败或本地改动阻塞更新时，说明原因并停止本次材料准备，绝不覆盖本地改动。
-
-仅基于真实项目与我确认的事实工作：不得虚构功能、源代码、截图、著作权归属、开发关系、发表事实或日期；不得修改原始项目；不得伪造官方申请表或承诺登记结果。将所有输出写入项目目录外的独立输出目录，并明确标记需要我确认的字段。
+不得虚构功能、源码、截图、权属、开发关系、发表事实或日期；不得修改原项目；所有输出必须写到项目之外的独立目录。说明书中的功能必须有项目证据。确认后锁定同一份事实源，生成后独立复查一致性、证据和敏感信息，不得伪造官方申请表或承诺登记结果。
 ```
 
 ## 安装
 
-以下命令为**首次全局安装**。它们保留仓库的 Git 检出，并将 Skill 链接到对应工具的
-全局目录，以便 Copyright Forge 在每天首次使用时检查并获取更新。若目标目录已存在，
-请先处理已有安装，避免覆盖本地修改。
+以下命令为首次全局安装。仓库保留为 Git 检出，Skill 使用符号链接引用它，因此每天首次处理材料时可以检查并获取更新。目标目录已经存在时，先处理已有安装，避免覆盖本地修改。
 
 ### Claude Code
 
-> 若你所说的 “Cloud Code” 指的是 Claude Code，请使用本节。Claude Code 的个人
-> Skill 目录为 `~/.claude/skills/`。
+“Cloud Code” 如指 Claude Code，请执行：
 
 ```bash
 CF_SKILL_HOME="$HOME/.claude"
@@ -44,13 +42,9 @@ mkdir -p "$CF_SKILL_HOME/skills"
 ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copyright-forge"
 ```
 
-重新打开 Claude Code 后，可输入 `/copyright-forge`，或直接提出“准备软件著作权登记
-材料”的请求。Claude Code 会在个人目录中发现该 Skill。
+重新打开 Claude Code 后，直接说“帮我给当前项目做软著”，或调用 `/copyright-forge`。
 
 ### Codex
-
-Codex 会从 `$CODEX_HOME/skills/` 发现全局 Skill；未设置 `CODEX_HOME` 时默认使用
-`~/.codex/skills/`。
 
 ```bash
 CF_SKILL_HOME="${CODEX_HOME:-$HOME/.codex}"
@@ -60,12 +54,9 @@ mkdir -p "$CF_SKILL_HOME/skills"
 ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copyright-forge"
 ```
 
-重新开始一个 Codex 会话后，直接说明要准备中国软件著作权登记材料，或显式调用
-`$copyright-forge`。
+重新开始 Codex 会话后，直接提出软著需求，或显式调用 `$copyright-forge`。
 
 ### OpenCode
-
-OpenCode 的全局 Skill 目录为 `~/.config/opencode/skills/`。
 
 ```bash
 CF_SKILL_HOME="$HOME/.config/opencode"
@@ -75,90 +66,41 @@ mkdir -p "$CF_SKILL_HOME/skills"
 ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copyright-forge"
 ```
 
-重新打开 OpenCode 后，直接描述软著材料准备任务，或使用 OpenCode 的 Skill 调用方式加载
-`copyright-forge`。
+重新打开 OpenCode 后，直接描述要做的软著任务即可。
 
-安装目录均是符号链接的目标之外的 Git 检出，因此请不要把 `copyright-forge-repo` 当作
-临时目录删除。各工具的目录约定请参阅 [Claude Code Skills](https://code.claude.com/docs/en/skills)、
-[Codex Skills](https://developers.openai.com/codex/skills/) 和
-[OpenCode Skills](https://opencode.ai/docs/skills/) 的官方文档。
+各工具目录约定见 [Claude Code Skills](https://code.claude.com/docs/en/skills)、[Codex Skills](https://developers.openai.com/codex/skills/) 与 [OpenCode Skills](https://opencode.ai/docs/skills/) 官方文档。
 
-## 核心能力
+## 使用
 
-| 能力 | 说明 |
-| --- | --- |
-| 项目理解 | 扫描 Go、Java、Python、Node.js、Vue、React 项目的结构、技术栈与源文件。 |
-| 证据映射 | 将候选功能关联到源代码、路由、模型或页面路径，避免无依据的功能描述。 |
-| 统一事实源 | 通过 `software-profile.yaml` 统一软件名称、版本与申请事实，防止材料之间不一致。 |
-| 源程序准备 | 为普通交存生成确定性的源程序选择清单，供人工复核和后续排版。 |
-| 安全处理 | 检测潜在密钥与敏感内容，只在生成副本中脱敏，绝不改写原项目。 |
-| 交付校验 | 校验软件信息、材料一致性与最终状态，区分阻塞项、警告和待确认事项。 |
-
-## 工作流
+在你的项目根目录打开 Agent，然后自然表达目标：
 
 ```text
-真实项目
-  -> 项目扫描
-  -> 功能证据映射
-  -> 软件信息确认
-  -> 说明书 / 源程序材料 / 填报信息
-  -> 一致性与安全校验
+帮我给当前项目做软著。
+帮我看看这个项目申请软著还缺什么。
+继续帮我完成软著材料。
+帮我重新检查一下刚才生成的材料。
 ```
 
-1. **扫描与取证**：识别项目结构、技术栈和可佐证功能的代码路径。
-2. **确认软件信息**：由申请人确认著作权人、开发方式、完成日期、发表状态等法律事实。
-3. **准备材料初稿**：所有软件名称和版本均读取同一份 `software-profile.yaml`。
-4. **执行校验**：确认功能有证据、材料身份一致，并复查生成副本中的敏感信息。
+正常流程如下：
 
-## 使用方式
+1. Agent 静默扫描项目、README、依赖、配置、路由、页面与源码。
+2. 它会告诉你识别到的项目类型、技术和主要功能，并为功能建立代码证据。
+3. 只有在调查后仍无法确定时，才会集中请你确认软件名称建议、申请主体、开发方式、真实日期和是否已公开使用等事实。
+4. 确认后锁定软件事实，生成说明书、源程序材料清单和申请信息填写指引。
+5. 独立审核功能证据、各材料的一致性和敏感信息；有问题会先自动修正，再请你处理无法自行解决的事实问题。
 
-Skill 入口位于 [skills/copyright-forge/SKILL.md](skills/copyright-forge/SKILL.md)。辅助脚本
-需要 Python 3.10+，仅使用标准库，且不会修改待分析项目。建议将输出目录放在项目之外：
+任务可以中断。输出目录保存 `software-profile.yaml`、`evidence-map.json`、`workflow-state.json` 与 `user-confirmations.json`；下次说“继续”时会检查项目是否变化并从上次阶段恢复。
 
-```bash
-SKILL=skills/copyright-forge
-OUT=/tmp/copyright-forge-output
+## 可靠性边界
 
-mkdir -p "$OUT"
-python3 "$SKILL/scripts/scan_project.py" /path/to/project --output "$OUT/project-scan.json"
-python3 "$SKILL/scripts/build_evidence_map.py" /path/to/project --output "$OUT/evidence-map.json"
-python3 "$SKILL/scripts/collect_source.py" /path/to/project --output "$OUT/source-manifest.json"
-```
+- 只基于真实项目和用户确认的事实；没有代码证据的功能不得写入正式材料。
+- 原项目只读，所有结果写到项目外的独立输出目录。
+- 不提交登记申请，不生成或改写官方申请表，不承诺申请一定通过。
+- 当前默认支持普通交存。合作、委托、受让、继承、修改他人软件、例外交存等情形会提示人工复核。
+- 每天首次使用会检查上游更新；发现更新且本地无改动时以 fast-forward 更新。更新检查失败或本地改动阻塞更新时，会停止本次材料准备，绝不覆盖本地改动。
 
-随后复制 [软件信息模板](skills/copyright-forge/assets/templates/software-profile.yaml) 到输出
-目录，补充并确认申请人专属事实，再执行：
+## 技术说明
 
-```bash
-python3 "$SKILL/scripts/validate_profile.py" "$OUT/software-profile.yaml" \
-  --output "$OUT/profile-validation.json"
-```
-
-## 可信边界
-
-- 不提交登记申请，不生成、伪造或改写官方申请表。
-- 不虚构功能、源代码、截图、著作权归属、开发关系、发表事实或日期。
-- 不将 Git 时间或 AI 推断作为已确认的申请事实。
-- 不修改待分析项目，不覆盖本地改动，不承诺登记申请一定通过。
-
-当前版本支持**普通交存**。例外交存、合作开发、委托开发、继承或受让、修改他人软件
-等情况会被标记为需要人工复核，而不会被强行自动化处理。提交前请以适用官方渠道的最新
-要求为准。
-
-## 项目结构
-
-```text
-skills/copyright-forge/
-  SKILL.md            Skill 入口与工作流
-  references/         规则、边界与材料要求
-  assets/templates/   软件信息和文档模板
-  assets/schemas/     JSON Schema
-  scripts/            扫描、证据、源程序、脱敏与校验脚本
-```
-
-完整架构见 [docs/architecture.md](docs/architecture.md)，支持范围见
-[docs/supported-projects.md](docs/supported-projects.md)，规则版本见
-[docs/rules-versioning.md](docs/rules-versioning.md)。
-
-## 开源许可
+核心入口位于 [skills/copyright-forge/SKILL.md](skills/copyright-forge/SKILL.md)。辅助脚本只使用 Python 标准库，适用于 Python 3.10+。详细架构见 [docs/architecture.md](docs/architecture.md)，支持范围见 [docs/supported-projects.md](docs/supported-projects.md)。
 
 Apache-2.0，详见 [LICENSE](LICENSE)。

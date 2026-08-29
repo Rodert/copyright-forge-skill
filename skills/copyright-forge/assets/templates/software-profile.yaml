@@ -1,28 +1,74 @@
-schema_version: "1.0"
+# This file becomes the only source of confirmed software facts after locking.
+schema_version: "2.0"
 software:
-  full_name: ""
-  short_name: ""
-  version: "V1.0"
-copyright:
-  owner:
+  full_name:
     value: ""
+    source: []
+    confidence: low
+    requires_confirmation: true
     status: requires_confirmation
+  short_name:
+    value: ""
+    source: []
+    confidence: low
+    requires_confirmation: true
+    status: requires_confirmation
+  version:
+    value: "V1.0"
+    source: []
+    confidence: low
+    requires_confirmation: true
+    status: requires_confirmation
+  type:
+    value: ""
+    source: []
+    confidence: medium
+    requires_confirmation: false
+    status: inferred
+technology:
+  frontend: []
+  backend: []
+  database: []
+  languages: []
+features: []
+applicant:
+  value: ""
+  source: ["user"]
+  confidence: high
+  requires_confirmation: true
+  status: requires_confirmation
+copyright:
   development_method:
     value: ""
+    source: ["user"]
+    confidence: high
+    requires_confirmation: true
     status: requires_confirmation
   rights_acquisition:
     value: ""
+    source: ["user"]
+    confidence: high
+    requires_confirmation: true
     status: requires_confirmation
+dates:
   completion_date:
     value: ""
+    source: ["user"]
+    confidence: high
+    requires_confirmation: true
     status: requires_confirmation
   publication_status:
     value: ""
+    source: ["user"]
+    confidence: high
+    requires_confirmation: true
     status: requires_confirmation
-project:
-  languages: []
-  frameworks: []
-  databases: []
-features: []
+  first_publication_date:
+    value: ""
+    source: ["user"]
+    confidence: high
+    requires_confirmation: true
+    status: requires_confirmation
 status:
   profile_confirmed: false
+  facts_locked: false

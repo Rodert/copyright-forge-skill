@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build conservative path-based feature evidence from a project tree."""
+"""Build conservative, traceable feature evidence from a project tree."""
 from __future__ import annotations
 
 import argparse
@@ -31,8 +31,9 @@ def main() -> None:
             continue
         evidence = [kind for kind, pattern in PATTERNS if pattern.search(text)]
         if evidence:
-            features.append({"id": path.relative_to(root).as_posix().replace("/", "-").replace(".", "-"), "name": path.stem.replace("_", " ").replace("-", " "), "confidence": "medium", "evidence": [{"type": kind, "path": path.relative_to(root).as_posix()} for kind in evidence]})
-    write_json(args.output, {"project": str(root), "features": features, "note": "Path-based candidate evidence. Confirm feature names before use in a document."})
+            relative = path.relative_to(root).as_posix()
+            features.append({"id": relative.replace("/", "-").replace(".", "-"), "name": path.stem.replace("_", " ").replace("-", " "), "claim_status": "candidate", "confidence": "medium", "evidence": [{"type": kind, "path": relative} for kind in evidence]})
+    write_json(args.output, {"schema_version": "2.0", "project": str(root), "features": features, "note": "Candidate evidence only. A document claim must cite a feature id and at least one listed project path; confirm its user-facing name before writing."})
 
 
 if __name__ == "__main__":
