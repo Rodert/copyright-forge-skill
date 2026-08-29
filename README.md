@@ -25,6 +25,64 @@ Copyright Forge 是一款面向中国软件著作权登记申请的 AI Agent Ski
 仅基于真实项目与我确认的事实工作：不得虚构功能、源代码、截图、著作权归属、开发关系、发表事实或日期；不得修改原始项目；不得伪造官方申请表或承诺登记结果。将所有输出写入项目目录外的独立输出目录，并明确标记需要我确认的字段。
 ```
 
+## 安装
+
+以下命令为**首次全局安装**。它们保留仓库的 Git 检出，并将 Skill 链接到对应工具的
+全局目录，以便 Copyright Forge 在每天首次使用时检查并获取更新。若目标目录已存在，
+请先处理已有安装，避免覆盖本地修改。
+
+### Claude Code
+
+> 若你所说的 “Cloud Code” 指的是 Claude Code，请使用本节。Claude Code 的个人
+> Skill 目录为 `~/.claude/skills/`。
+
+```bash
+CF_SKILL_HOME="$HOME/.claude"
+mkdir -p "$CF_SKILL_HOME"
+git clone --depth 1 https://github.com/Rodert/copyright-forge-skill.git "$CF_SKILL_HOME/copyright-forge-repo"
+mkdir -p "$CF_SKILL_HOME/skills"
+ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copyright-forge"
+```
+
+重新打开 Claude Code 后，可输入 `/copyright-forge`，或直接提出“准备软件著作权登记
+材料”的请求。Claude Code 会在个人目录中发现该 Skill。
+
+### Codex
+
+Codex 会从 `$CODEX_HOME/skills/` 发现全局 Skill；未设置 `CODEX_HOME` 时默认使用
+`~/.codex/skills/`。
+
+```bash
+CF_SKILL_HOME="${CODEX_HOME:-$HOME/.codex}"
+mkdir -p "$CF_SKILL_HOME"
+git clone --depth 1 https://github.com/Rodert/copyright-forge-skill.git "$CF_SKILL_HOME/copyright-forge-repo"
+mkdir -p "$CF_SKILL_HOME/skills"
+ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copyright-forge"
+```
+
+重新开始一个 Codex 会话后，直接说明要准备中国软件著作权登记材料，或显式调用
+`$copyright-forge`。
+
+### OpenCode
+
+OpenCode 的全局 Skill 目录为 `~/.config/opencode/skills/`。
+
+```bash
+CF_SKILL_HOME="$HOME/.config/opencode"
+mkdir -p "$CF_SKILL_HOME"
+git clone --depth 1 https://github.com/Rodert/copyright-forge-skill.git "$CF_SKILL_HOME/copyright-forge-repo"
+mkdir -p "$CF_SKILL_HOME/skills"
+ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copyright-forge"
+```
+
+重新打开 OpenCode 后，直接描述软著材料准备任务，或使用 OpenCode 的 Skill 调用方式加载
+`copyright-forge`。
+
+安装目录均是符号链接的目标之外的 Git 检出，因此请不要把 `copyright-forge-repo` 当作
+临时目录删除。各工具的目录约定请参阅 [Claude Code Skills](https://code.claude.com/docs/en/skills)、
+[Codex Skills](https://developers.openai.com/codex/skills/) 和
+[OpenCode Skills](https://opencode.ai/docs/skills/) 的官方文档。
+
 ## 核心能力
 
 | 能力 | 说明 |
