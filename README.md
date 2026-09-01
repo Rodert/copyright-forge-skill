@@ -1,6 +1,6 @@
 # Copyright Forge Skill
 
-> 面向中国软件著作权登记的证据驱动 Agent Skill。
+> 把真实软件项目变成可追溯、可检查、可继续修改的软著材料。
 
 [简体中文](README.md) | [English](docs/README.en.md) | [日本語](docs/README.ja.md) | [한국어](docs/README.ko.md) | [Русский](docs/README.ru.md) | [Français](docs/README.fr.md)
 
@@ -10,7 +10,7 @@
 帮我给这个项目做一套软著材料。
 ```
 
-Copyright Forge 会先理解项目和代码，再整理有证据的功能，只把必须由你确认的真实事实用普通人语言一次问清。它会在生成后再独立检查材料的一致性、功能证据和敏感信息。
+这不是填写模板，也不是让 AI 根据项目名称编造功能。Copyright Forge 会读取真实代码、建立功能证据、确认无法从代码判断的事实，再生成材料并进行独立审核。
 
 项目站点：[rodert.github.io/copyright-forge-skill](https://rodert.github.io/copyright-forge-skill/)
 
@@ -79,6 +79,8 @@ ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copy
 帮我看看这个项目申请软著还缺什么。
 继续帮我完成软著材料。
 帮我重新检查一下刚才生成的材料。
+这是版权中心让我补正的内容，帮我看看怎么改。
+帮我检查软著材料规则有没有更新。
 ```
 
 正常流程如下：
@@ -86,8 +88,9 @@ ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copy
 1. Agent 静默扫描项目、README、依赖、配置、路由、页面与源码。
 2. 它会告诉你识别到的项目类型、技术和主要功能，并为功能建立代码证据。
 3. 只有在调查后仍无法确定时，才会集中请你确认软件名称建议、申请主体、开发方式、真实日期和是否已公开使用等事实。
-4. 确认后锁定软件事实，生成说明书、源程序材料清单和申请信息填写指引。
-5. 独立审核功能证据、各材料的一致性和敏感信息；有问题会先自动修正，再请你处理无法自行解决的事实问题。
+4. 确认后锁定软件事实，生成说明书、源程序鉴别材料、申请信息填写指引、功能证据清单和质量报告。
+5. 源程序会从第一方核心代码中选择连续材料、进行脱敏、分页，并可输出 HTML、DOCX、PDF。
+6. 独立审核八道质量门：事实、证据、一致性、源程序、说明书、隐私、幻觉与提交前检查；有问题会先自动修正，再请你处理无法自行解决的事实问题。
 
 任务可以中断。输出目录保存 `software-profile.yaml`、`evidence-map.json`、`workflow-state.json` 与 `user-confirmations.json`；下次说“继续”时会检查项目是否变化并从上次阶段恢复。
 
@@ -96,11 +99,12 @@ ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copy
 - 只基于真实项目和用户确认的事实；没有代码证据的功能不得写入正式材料。
 - 原项目只读，所有结果写到项目外的独立输出目录。
 - 不提交登记申请，不生成或改写官方申请表，不承诺申请一定通过。
-- 当前默认支持普通交存。合作、委托、受让、继承、修改他人软件、例外交存等情形会提示人工复核。
-- 每天首次使用会检查上游更新；发现更新且本地无改动时以 fast-forward 更新。更新检查失败或本地改动阻塞更新时，会停止本次材料准备，绝不覆盖本地改动。
+- 当前默认支持普通交存。合作、委托、受让、继承、修改他人软件、例外交存等情形会继续完成可由项目完成的部分，并明确标记合同、权属或提交环节需要人工复核的内容。
+- 每天首次使用会尽力检查上游更新；网络不可用、非 Git 安装或本地改动不会阻断材料工作，也绝不覆盖本地改动。
+- 规则库保存来源、法律属性、适用范围和核验日期。规则雷达只生成待人工审核的变化报告，绝不会自动篡改规则。
 
 ## 技术说明
 
-核心入口位于 [skills/copyright-forge/SKILL.md](skills/copyright-forge/SKILL.md)。辅助脚本只使用 Python 标准库，适用于 Python 3.10+。详细架构见 [docs/architecture.md](docs/architecture.md)，支持范围见 [docs/supported-projects.md](docs/supported-projects.md)。
+核心入口是薄路由器 [skills/copyright-forge/SKILL.md](skills/copyright-forge/SKILL.md)，创建、诊断、续办、补正和规则核验均使用独立流程模块。辅助脚本适用于 Python 3.10+；PDF 渲染需要 Agent 运行环境提供 `reportlab`。详细架构见 [docs/architecture.md](docs/architecture.md)，支持范围见 [docs/supported-projects.md](docs/supported-projects.md)。
 
 Apache-2.0，详见 [LICENSE](LICENSE)。

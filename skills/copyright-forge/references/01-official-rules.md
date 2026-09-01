@@ -1,13 +1,18 @@
-# Official Rules
+# Official Rules Index
 
-Rules version: `2026.08`; last verified: `2026-08-23`.
+Rules version: `2026.09`; registry verification date: `2026-09-01`.
 
-| ID | Rule | Type | Severity | Source |
-| --- | --- | --- | --- | --- |
-| CN-SCR-CODE-001 | Ordinary deposit normally uses the first 30 and last 30 consecutive pages of source code; submit all code when fewer than 60 pages. | Official | Blocker | Regulations for Computer Software Copyright Registration, Art. 10 |
-| CN-SCR-CODE-002 | Source identification materials are generally A4, portrait, single-sided, black and white, paginated at top right, with software name and version in the header. | Official guidance | Blocker | Current local registration service guidance |
-| CN-SCR-FORM-001 | Application forms are completed and printed through the official registration process; do not alter their format. | Official guidance | Blocker | Current registration service guidance |
+Read the applicable file under `official/` before preparing final material. Each
+rule records its authority, source title, source URL, legal character,
+applicability, and verification date. This index deliberately separates:
 
-Official rules can change. Confirm the current official channel's instructions
-before submission. Project conventions have `CFS-BESTPRACTICE-*` IDs and must
-not be described as official requirements.
+| Classification | Meaning |
+| --- | --- |
+| `law_or_regulation` | Binding law, administrative regulation, or departmental rule. |
+| `official_service_guidance` | Published official handling guidance; verify the current submission channel. |
+| `local_practice` | Local/window practice, not a universal national rule. |
+| `best_practice` | Copyright Forge quality convention, never described as official. |
+| `model_inference` | A hypothesis only; cannot establish a requirement or feature. |
+
+Use the registry rather than reproducing rules from memory. Before submission,
+check the current official channel because operating guidance can change.

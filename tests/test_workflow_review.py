@@ -33,6 +33,33 @@ def profile() -> dict:
 
 
 class WorkflowAndReviewTest(unittest.TestCase):
+    def test_source_builder_creates_valid_ordinary_deposit_page_plan(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "output"
+            output.mkdir()
+            manifest = output / "manifest.json"
+            manifest.write_text(json.dumps({"files": [{"path": "main.go"}, {"path": "config.go"}]}), encoding="utf-8")
+            selection = output / "selection.json"
+            run("select_source_material.py", str(FIXTURE), str(manifest), "--output", str(selection))
+            profile_path = output / "software-profile.json"
+            profile_path.write_text(json.dumps(profile(), ensure_ascii=False), encoding="utf-8")
+            pages = output / "pages"
+            run("build_source_pages.py", str(FIXTURE), str(selection), str(profile_path), "--output-dir", str(pages))
+            report = output / "source-validation.json"
+            run("validate_source_pages.py", str(pages / "source-pages.json"), "--output", str(report))
+            self.assertEqual("READY", json.loads(report.read_text())["status"])
+            self.assertIn("示例服务系统", (pages / "source-material.txt").read_text())
+            docx = output / "source-material.docx"
+            run("render_source_docx.py", str(pages / "source-material.txt"), "--output", str(docx))
+            self.assertTrue(docx.exists())
+
+    def test_rules_radar_is_non_blocking_without_network(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            report = Path(directory) / "rules.json"
+            registry = ROOT / "skills" / "copyright-forge" / "references" / "official" / "source-registry.yaml"
+            run("check_rules.py", str(registry), "--output", str(report))
+            self.assertEqual("REVIEW_REQUIRED", json.loads(report.read_text())["status"])
+
     def test_locked_facts_and_evidence_backed_review(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "output"
@@ -52,6 +79,9 @@ class WorkflowAndReviewTest(unittest.TestCase):
             report = output / "review.json"
             run("review_materials.py", str(profile_path), str(evidence_path), str(materials), "--task-dir", str(output), "--output", str(report))
             self.assertEqual("READY", json.loads(report.read_text())["status"])
+            quality_html = output / "quality-report.html"
+            run("render_quality_report.py", str(report), "--output", str(quality_html))
+            self.assertIn("材料质量报告", quality_html.read_text())
 
     def test_review_blocks_feature_outside_locked_profile(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

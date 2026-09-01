@@ -7,7 +7,7 @@ independently. Each resolved field records its source, confidence, and whether
 human confirmation was required.
 
 ```text
-project -> scan -> evidence map -> confirmation -> facts lock -> materials -> independent review
+project -> adapter scan -> evidence map -> feature graph -> confirmation -> facts lock -> materials -> eight quality gates
 ```
 
 `workflow-state.json` records the sole workflow states: `ANALYZING`,
@@ -18,3 +18,8 @@ or changed facts.
 
 Scripts are read-only with respect to the input project. They write only to a
 user-selected output directory.
+
+`SKILL.md` is deliberately a thin router. The detailed create, review, resume,
+correction, and rules-update workflows live under `prompts/`. The rules registry
+records authority, source URL, classification, applicability, and verification
+date; the rules radar produces only a human-reviewable change report.

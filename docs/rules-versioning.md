@@ -2,10 +2,13 @@
 
 ```yaml
 jurisdiction: CN-mainland
-rules_version: "2026.08"
-last_verified: "2026-08-23"
+rules_version: "2026.09"
+last_verified: "2026-09-01"
 ```
 
-Official requirements and project conventions use separate rule identifiers.
-Update the verification date and source reference whenever an official rule is
-changed. A generated report should state the rules version it used.
+The official source registry is `skills/copyright-forge/references/official/source-registry.yaml`.
+Official requirements, service guidance, local practice, project conventions,
+and model inference use separate classifications. A rules radar report can
+collect source fingerprints but never updates local rules automatically; a human
+must review evidence and approve each semantic rule change. Generated reports
+state the rules version used.

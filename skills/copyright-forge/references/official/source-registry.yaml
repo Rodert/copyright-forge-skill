@@ -1,0 +1,20 @@
+registry_version: "1.0"
+jurisdiction: CN-mainland
+last_verified: "2026-09-01"
+sources:
+  - id: CN-SCR-REG-2002
+    authority: 国家版权局
+    source_title: 计算机软件著作权登记办法
+    source_url: https://www.gov.cn/gongbao/content/2002/content_61744.htm
+    source_type: law_or_regulation
+    effective_date: "2002-02-20"
+    last_verified: "2026-09-01"
+    status: active
+  - id: CN-SCR-SERVICE-PORTAL
+    authority: 中国版权保护中心
+    source_title: 计算机软件著作权登记服务
+    source_url: https://www.ccopyright.com.cn/
+    source_type: official_service_guidance
+    effective_date: ""
+    last_verified: "2026-09-01"
+    status: verify_before_submission
