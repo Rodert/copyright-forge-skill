@@ -28,7 +28,8 @@ def main() -> None:
     files = list(iter_project_files(root))
     extensions = Counter(path.suffix.lower() for path in files)
     languages = sorted({LANGUAGES[ext] for ext in extensions if ext in LANGUAGES})
-    markers = sorted(name for name in MARKERS if (root / name).exists() or (name == "*.csproj" and list(root.glob("*.csproj"))))
+    names = {path.name for path in files}
+    markers = sorted(name for name in MARKERS if name in names or (name == "*.csproj" and any(path.suffix == ".csproj" for path in files)))
     source_files = [path.relative_to(root).as_posix() for path in files if path.suffix.lower() in SOURCE_EXTENSIONS]
     write_json(args.output, {"project": str(root), "file_count": len(files), "source_file_count": len(source_files), "languages": languages, "markers": [{"file": name, "meaning": MARKERS[name]} for name in markers], "extension_counts": dict(sorted(extensions.items())), "source_files": source_files})
 

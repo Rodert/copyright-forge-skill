@@ -1,0 +1,1 @@
+<script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const statuses=ref<any[]>([]);onMounted(async()=>statuses.value=await get("/task-statuses"));</script><template><h1>任务状态管理</h1><div class="panel" v-for="status in statuses" :key="status.name">{{status.order}}. {{status.name}}</div></template>

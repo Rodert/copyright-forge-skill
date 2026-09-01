@@ -1,0 +1,1 @@
+<script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const logs=ref<any[]>([]);onMounted(async()=>logs.value=await get("/operation-logs"));</script><template><h1>操作日志</h1><div class="panel" v-for="log in logs" :key="log.id">{{log.created_at}} · {{log.action}}</div></template>

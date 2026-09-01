@@ -1,0 +1,488 @@
+{
+  "schema_version": "1.0",
+  "project": "/Users/xuanxuanzi/home/s/javapub/copyright-forge-skill/examples/flowtask-demo/project",
+  "features": [
+    {
+      "id": "F001",
+      "name": "App",
+      "support_score": 0.28,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/App.vue"
+        }
+      ],
+      "source_candidates": [
+        "frontend-src-App-vue"
+      ]
+    },
+    {
+      "id": "F002",
+      "name": "auth",
+      "support_score": 0.46,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/auth.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/auth.py"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-auth-py"
+      ]
+    },
+    {
+      "id": "F003",
+      "name": "dashboard",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/dashboard.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/dashboard.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/DashboardView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/DashboardView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-dashboard-py",
+        "frontend-src-views-DashboardView-vue"
+      ]
+    },
+    {
+      "id": "F004",
+      "name": "db",
+      "support_score": 0.46,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "model",
+          "path": "backend/app/db.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/db.py"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-db-py"
+      ]
+    },
+    {
+      "id": "F005",
+      "name": "exports",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/exports.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/exports.py"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/ExportsView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-exports-py",
+        "frontend-src-views-ExportsView-vue"
+      ]
+    },
+    {
+      "id": "F006",
+      "name": "api",
+      "support_score": 0.28,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "source_code",
+          "path": "frontend/src/api.ts"
+        }
+      ],
+      "source_candidates": [
+        "frontend-src-api-ts"
+      ]
+    },
+    {
+      "id": "F007",
+      "name": "labels",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/labels.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/labels.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/LabelsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/LabelsView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/LabelsView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-labels-py",
+        "frontend-src-views-LabelsView-vue"
+      ]
+    },
+    {
+      "id": "F008",
+      "name": "LoginView",
+      "support_score": 0.46,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/views/LoginView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/LoginView.vue"
+        }
+      ],
+      "source_candidates": [
+        "frontend-src-views-LoginView-vue"
+      ]
+    },
+    {
+      "id": "F009",
+      "name": "logs",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/logs.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/logs.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/LogsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/LogsView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-logs-py",
+        "frontend-src-views-LogsView-vue"
+      ]
+    },
+    {
+      "id": "F010",
+      "name": "main",
+      "support_score": 0.28,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "source_code",
+          "path": "backend/app/main.py"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-main-py"
+      ]
+    },
+    {
+      "id": "F011",
+      "name": "models",
+      "support_score": 0.46,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "model",
+          "path": "backend/app/models.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/models.py"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-models-py"
+      ]
+    },
+    {
+      "id": "F012",
+      "name": "priorities",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/priorities.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/priorities.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/PrioritiesView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/PrioritiesView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-priorities-py",
+        "frontend-src-views-PrioritiesView-vue"
+      ]
+    },
+    {
+      "id": "F013",
+      "name": "projects",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/projects.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/projects.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/ProjectsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/ProjectsView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/ProjectsView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-projects-py",
+        "frontend-src-views-ProjectsView-vue"
+      ]
+    },
+    {
+      "id": "F014",
+      "name": "router",
+      "support_score": 0.28,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/router.ts"
+        }
+      ],
+      "source_candidates": [
+        "frontend-src-router-ts"
+      ]
+    },
+    {
+      "id": "F015",
+      "name": "search",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/search.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/search.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/SearchView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/SearchView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/SearchView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-search-py",
+        "frontend-src-views-SearchView-vue"
+      ]
+    },
+    {
+      "id": "F016",
+      "name": "services",
+      "support_score": 0.28,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "source_code",
+          "path": "backend/app/services.py"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-services-py"
+      ]
+    },
+    {
+      "id": "F017",
+      "name": "settings",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/settings.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/settings.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/SettingsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/SettingsView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-settings-py",
+        "frontend-src-views-SettingsView-vue"
+      ]
+    },
+    {
+      "id": "F018",
+      "name": "StatisticsView",
+      "support_score": 0.46,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/StatisticsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/StatisticsView.vue"
+        }
+      ],
+      "source_candidates": [
+        "frontend-src-views-StatisticsView-vue"
+      ]
+    },
+    {
+      "id": "F019",
+      "name": "stats",
+      "support_score": 0.46,
+      "documentation_eligibility": false,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/stats.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/stats.py"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-stats-py"
+      ]
+    },
+    {
+      "id": "F020",
+      "name": "statuses",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/statuses.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/statuses.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/StatusesView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/StatusesView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-statuses-py",
+        "frontend-src-views-StatusesView-vue"
+      ]
+    },
+    {
+      "id": "F021",
+      "name": "tasks",
+      "support_score": 0.74,
+      "documentation_eligibility": true,
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/tasks.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/tasks.py"
+        },
+        {
+          "type": "route",
+          "path": "frontend/src/views/TasksView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/TasksView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/TasksView.vue"
+        }
+      ],
+      "source_candidates": [
+        "backend-app-routers-tasks-py",
+        "frontend-src-views-TasksView-vue"
+      ]
+    }
+  ],
+  "note": "Feature names remain candidates. Documentation eligibility is a deterministic minimum gate, not proof of a user-facing claim."
+}

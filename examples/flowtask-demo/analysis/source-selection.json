@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0",
+  "project": "/Users/xuanxuanzi/home/s/javapub/copyright-forge-skill/examples/flowtask-demo/project",
+  "files": [
+    {
+      "path": "backend/app/main.py",
+      "lines": 17,
+      "start_line": 1,
+      "end_line": 17
+    },
+    {
+      "path": "frontend/src/main.ts",
+      "lines": 6,
+      "start_line": 18,
+      "end_line": 23
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "lines": 1,
+      "start_line": 24,
+      "end_line": 24
+    },
+    {
+      "path": "backend/app/db.py",
+      "lines": 27,
+      "start_line": 25,
+      "end_line": 51
+    },
+    {
+      "path": "backend/app/models.py",
+      "lines": 32,
+      "start_line": 52,
+      "end_line": 83
+    },
+    {
+      "path": "backend/app/routers/__init__.py",
+      "lines": 1,
+      "start_line": 84,
+      "end_line": 84
+    },
+    {
+      "path": "backend/app/routers/auth.py",
+      "lines": 11,
+      "start_line": 85,
+      "end_line": 95
+    },
+    {
+      "path": "backend/app/routers/dashboard.py",
+      "lines": 9,
+      "start_line": 96,
+      "end_line": 104
+    },
+    {
+      "path": "backend/app/routers/exports.py",
+      "lines": 14,
+      "start_line": 105,
+      "end_line": 118
+    },
+    {
+      "path": "backend/app/routers/labels.py",
+      "lines": 18,
+      "start_line": 119,
+      "end_line": 136
+    },
+    {
+      "path": "backend/app/routers/logs.py",
+      "lines": 9,
+      "start_line": 137,
+      "end_line": 145
+    },
+    {
+      "path": "backend/app/routers/priorities.py",
+      "lines": 8,
+      "start_line": 146,
+      "end_line": 153
+    },
+    {
+      "path": "backend/app/routers/projects.py",
+      "lines": 19,
+      "start_line": 154,
+      "end_line": 172
+    },
+    {
+      "path": "backend/app/routers/search.py",
+      "lines": 9,
+      "start_line": 173,
+      "end_line": 181
+    },
+    {
+      "path": "backend/app/routers/settings.py",
+      "lines": 18,
+      "start_line": 182,
+      "end_line": 199
+    },
+    {
+      "path": "backend/app/routers/stats.py",
+      "lines": 9,
+      "start_line": 200,
+      "end_line": 208
+    },
+    {
+      "path": "backend/app/routers/statuses.py",
+      "lines": 8,
+      "start_line": 209,
+      "end_line": 216
+    },
+    {
+      "path": "backend/app/routers/tasks.py",
+      "lines": 26,
+      "start_line": 217,
+      "end_line": 242
+    },
+    {
+      "path": "backend/app/services.py",
+      "lines": 16,
+      "start_line": 243,
+      "end_line": 258
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "lines": 4,
+      "start_line": 259,
+      "end_line": 262
+    },
+    {
+      "path": "frontend/src/router.ts",
+      "lines": 22,
+      "start_line": 263,
+      "end_line": 284
+    },
+    {
+      "path": "frontend/src/views/DashboardView.vue",
+      "lines": 1,
+      "start_line": 285,
+      "end_line": 285
+    },
+    {
+      "path": "frontend/src/views/ExportsView.vue",
+      "lines": 1,
+      "start_line": 286,
+      "end_line": 286
+    },
+    {
+      "path": "frontend/src/views/LabelsView.vue",
+      "lines": 1,
+      "start_line": 287,
+      "end_line": 287
+    },
+    {
+      "path": "frontend/src/views/LoginView.vue",
+      "lines": 1,
+      "start_line": 288,
+      "end_line": 288
+    },
+    {
+      "path": "frontend/src/views/LogsView.vue",
+      "lines": 1,
+      "start_line": 289,
+      "end_line": 289
+    },
+    {
+      "path": "frontend/src/views/PrioritiesView.vue",
+      "lines": 1,
+      "start_line": 290,
+      "end_line": 290
+    },
+    {
+      "path": "frontend/src/views/ProjectsView.vue",
+      "lines": 1,
+      "start_line": 291,
+      "end_line": 291
+    },
+    {
+      "path": "frontend/src/views/SearchView.vue",
+      "lines": 1,
+      "start_line": 292,
+      "end_line": 292
+    },
+    {
+      "path": "frontend/src/views/SettingsView.vue",
+      "lines": 1,
+      "start_line": 293,
+      "end_line": 293
+    },
+    {
+      "path": "frontend/src/views/StatisticsView.vue",
+      "lines": 1,
+      "start_line": 294,
+      "end_line": 294
+    },
+    {
+      "path": "frontend/src/views/StatusesView.vue",
+      "lines": 1,
+      "start_line": 295,
+      "end_line": 295
+    },
+    {
+      "path": "frontend/src/views/TasksView.vue",
+      "lines": 1,
+      "start_line": 296,
+      "end_line": 296
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "lines": 13,
+      "start_line": 297,
+      "end_line": 309
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "lines": 4,
+      "start_line": 310,
+      "end_line": 313
+    }
+  ],
+  "total_lines": 313,
+  "selection_rule": "Whole first-party files in deterministic manifest order; no source content is edited.",
+  "ordinary_deposit_note": "Formatting selection is validated against the local rules registry; confirm current official service guidance before submission."
+}

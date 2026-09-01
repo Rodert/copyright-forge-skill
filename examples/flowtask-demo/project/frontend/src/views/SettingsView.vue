@@ -1,0 +1,1 @@
+<script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const settings=ref<any[]>([]);onMounted(async()=>settings.value=await get("/settings"));</script><template><h1>用户设置</h1><div class="panel" v-for="setting in settings" :key="setting.key">{{setting.key}}：{{setting.value}}</div></template>

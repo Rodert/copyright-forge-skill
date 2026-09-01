@@ -1,0 +1,68 @@
+{
+  "status": "READY",
+  "quality_score": 100,
+  "quality_label": "READY",
+  "gates": [
+    {
+      "id": "G1",
+      "name": "Fact Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G2",
+      "name": "Evidence Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G3",
+      "name": "Consistency Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G4",
+      "name": "Source Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G5",
+      "name": "Document Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G6",
+      "name": "Privacy Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G7",
+      "name": "Hallucination Gate",
+      "status": "PASS",
+      "findings": []
+    },
+    {
+      "id": "G8",
+      "name": "Submission Preflight",
+      "status": "PASS",
+      "findings": []
+    }
+  ],
+  "blockers": [],
+  "warnings": [],
+  "info": [
+    {
+      "checked_files": [
+        "application-info.md",
+        "software-manual.md"
+      ]
+    },
+    {
+      "evidence_backed_feature_count": 29
+    }
+  ]
+}

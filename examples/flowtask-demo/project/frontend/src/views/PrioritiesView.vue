@@ -1,0 +1,1 @@
+<script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const priorities=ref<any[]>([]);onMounted(async()=>priorities.value=await get("/priorities"));</script><template><h1>优先级管理</h1><div class="panel" v-for="priority in priorities" :key="priority.name"><span :style="{color:priority.color}">●</span> {{priority.name}}</div></template>

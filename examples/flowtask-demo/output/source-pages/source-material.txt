@@ -1,0 +1,345 @@
+FlowTask个人任务与项目管理系统 V1.0
+第 1 页
+backend/app/main.py:    1  from fastapi import FastAPI
+backend/app/main.py:    2  from fastapi.middleware.cors import CORSMiddleware
+backend/app/main.py:    3  
+backend/app/main.py:    4  from .db import initialize
+backend/app/main.py:    5  from .routers import auth, dashboard, exports, labels, logs, priorities, projects, search, settings, stats, statuses, tasks
+backend/app/main.py:    6  
+backend/app/main.py:    7  app = FastAPI(title="FlowTask API", version="1.0.0")
+backend/app/main.py:    8  app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173"], allow_methods=["*"], allow_headers=["*"])
+backend/app/main.py:    9  
+backend/app/main.py:   10  
+backend/app/main.py:   11  @app.on_event("startup")
+backend/app/main.py:   12  def startup() -> None:
+backend/app/main.py:   13      initialize()
+backend/app/main.py:   14  
+backend/app/main.py:   15  
+backend/app/main.py:   16  for router in (auth.router, dashboard.router, projects.router, tasks.router, statuses.router, priorities.router, labels.router, search.router, stats.router, logs.router, settings.router, exports.router):
+backend/app/main.py:   17      app.include_router(router, prefix="/api")
+frontend/src/main.ts:    1  import { createApp } from "vue";
+frontend/src/main.ts:    2  import App from "./App.vue";
+frontend/src/main.ts:    3  import router from "./router";
+frontend/src/main.ts:    4  import "./styles.css";
+frontend/src/main.ts:    5  
+frontend/src/main.ts:    6  createApp(App).use(router).mount("#app");
+backend/app/__init__.py:    1  """FlowTask API package."""
+backend/app/db.py:    1  import sqlite3
+backend/app/db.py:    2  from pathlib import Path
+backend/app/db.py:    3  
+backend/app/db.py:    4  DATABASE = Path(__file__).resolve().parents[1] / "flowtask.db"
+backend/app/db.py:    5  
+backend/app/db.py:    6  
+backend/app/db.py:    7  def connect() -> sqlite3.Connection:
+backend/app/db.py:    8      connection = sqlite3.connect(DATABASE)
+backend/app/db.py:    9      connection.row_factory = sqlite3.Row
+backend/app/db.py:   10      return connection
+backend/app/db.py:   11  
+backend/app/db.py:   12  
+backend/app/db.py:   13  def initialize() -> None:
+backend/app/db.py:   14      with connect() as db:
+backend/app/db.py:   15          db.executescript("""
+backend/app/db.py:   16          CREATE TABLE IF NOT EXISTS projects (id INTEGER PRIMARY KEY, name TEXT NOT NULL, status TEXT NOT NULL, color TEXT NOT NULL);
+backend/app/db.py:   17          CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY, project_id INTEGER, title TEXT NOT NULL, status TEXT NOT NULL, priority TEXT NOT NULL, due_date TEXT, labels TEXT NOT NULL DEFAULT '');
+backend/app/db.py:   18          CREATE TABLE IF NOT EXISTS labels (id INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, color TEXT NOT NULL);
+backend/app/db.py:   19          CREATE TABLE IF NOT EXISTS activity_logs (id INTEGER PRIMARY KEY, action TEXT NOT NULL, created_at TEXT NOT NULL);
+backend/app/db.py:   20          CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+backend/app/db.py:   21          """)
+backend/app/db.py:   22          if not db.execute("SELECT 1 FROM projects LIMIT 1").fetchone():
+backend/app/db.py:   23              db.executemany("INSERT INTO projects (name, status, color) VALUES (?, ?, ?)", [("FlowTask 产品迭代", "进行中", "#2f6756"), ("个人学习计划", "规划中", "#b76c37")])
+backend/app/db.py:   24              db.executemany("INSERT INTO tasks (project_id, title, status, priority, due_date, labels) VALUES (?, ?, ?, ?, ?, ?)", [(1, "完成任务筛选", "进行中", "高", "2026-09-18", "前端,体验"), (1, "编写 API 文档", "待办", "中", "2026-09-21", "后端"), (2, "学习 FastAPI", "已完成", "低", "2026-09-10", "学习")])
+backend/app/db.py:   25              db.executemany("INSERT INTO labels (name, color) VALUES (?, ?)", [("前端", "#3867d6"), ("后端", "#7c4dff"), ("体验", "#e67e22"), ("学习", "#16a085")])
+backend/app/db.py:   26              db.executemany("INSERT INTO activity_logs (action, created_at) VALUES (?, ?)", [("创建了 FlowTask 产品迭代项目", "2026-09-01 09:00"), ("更新了任务筛选", "2026-09-01 10:30")])
+
+
+
+FlowTask个人任务与项目管理系统 V1.0
+第 2 页
+backend/app/db.py:   27              db.execute("INSERT INTO settings (key, value) VALUES ('theme', 'system')")
+backend/app/models.py:    1  from typing import Optional
+backend/app/models.py:    2  
+backend/app/models.py:    3  from pydantic import BaseModel
+backend/app/models.py:    4  
+backend/app/models.py:    5  
+backend/app/models.py:    6  class LoginRequest(BaseModel):
+backend/app/models.py:    7      email: str
+backend/app/models.py:    8      password: str
+backend/app/models.py:    9  
+backend/app/models.py:   10  
+backend/app/models.py:   11  class ProjectInput(BaseModel):
+backend/app/models.py:   12      name: str
+backend/app/models.py:   13      status: str = "规划中"
+backend/app/models.py:   14      color: str = "#2f6756"
+backend/app/models.py:   15  
+backend/app/models.py:   16  
+backend/app/models.py:   17  class TaskInput(BaseModel):
+backend/app/models.py:   18      title: str
+backend/app/models.py:   19      project_id: Optional[int] = None
+backend/app/models.py:   20      status: str = "待办"
+backend/app/models.py:   21      priority: str = "中"
+backend/app/models.py:   22      due_date: Optional[str] = None
+backend/app/models.py:   23      labels: str = ""
+backend/app/models.py:   24  
+backend/app/models.py:   25  
+backend/app/models.py:   26  class LabelInput(BaseModel):
+backend/app/models.py:   27      name: str
+backend/app/models.py:   28      color: str = "#3867d6"
+backend/app/models.py:   29  
+backend/app/models.py:   30  
+backend/app/models.py:   31  class SettingInput(BaseModel):
+backend/app/models.py:   32      value: str
+backend/app/routers/__init__.py:    1  """FlowTask HTTP route modules."""
+backend/app/routers/auth.py:    1  from fastapi import APIRouter, HTTPException
+backend/app/routers/auth.py:    2  from ..models import LoginRequest
+backend/app/routers/auth.py:    3  
+backend/app/routers/auth.py:    4  router = APIRouter(tags=["authentication"])
+backend/app/routers/auth.py:    5  
+backend/app/routers/auth.py:    6  
+backend/app/routers/auth.py:    7  @router.post("/auth/login")
+backend/app/routers/auth.py:    8  def login(payload: LoginRequest) -> dict:
+backend/app/routers/auth.py:    9      if not payload.email or not payload.password:
+backend/app/routers/auth.py:   10          raise HTTPException(status_code=400, detail="请输入邮箱和密码")
+backend/app/routers/auth.py:   11      return {"user": {"name": "Demo User", "email": payload.email}, "session": "demo-session"}
+backend/app/routers/dashboard.py:    1  from fastapi import APIRouter
+backend/app/routers/dashboard.py:    2  from ..services import rows, task_metrics
+backend/app/routers/dashboard.py:    3  
+backend/app/routers/dashboard.py:    4  router = APIRouter(tags=["dashboard"])
+backend/app/routers/dashboard.py:    5  
+
+
+
+FlowTask个人任务与项目管理系统 V1.0
+第 3 页
+backend/app/routers/dashboard.py:    6  
+backend/app/routers/dashboard.py:    7  @router.get("/dashboard")
+backend/app/routers/dashboard.py:    8  def dashboard() -> dict:
+backend/app/routers/dashboard.py:    9      return {"metrics": task_metrics(), "recent_tasks": rows("SELECT * FROM tasks ORDER BY id DESC LIMIT 5"), "projects": rows("SELECT * FROM projects ORDER BY id")}
+backend/app/routers/exports.py:    1  import csv
+backend/app/routers/exports.py:    2  import io
+backend/app/routers/exports.py:    3  from fastapi import APIRouter
+backend/app/routers/exports.py:    4  from fastapi.responses import StreamingResponse
+backend/app/routers/exports.py:    5  from ..services import rows
+backend/app/routers/exports.py:    6  
+backend/app/routers/exports.py:    7  router = APIRouter(tags=["exports"])
+backend/app/routers/exports.py:    8  
+backend/app/routers/exports.py:    9  
+backend/app/routers/exports.py:   10  @router.get("/exports/tasks")
+backend/app/routers/exports.py:   11  def export_tasks() -> StreamingResponse:
+backend/app/routers/exports.py:   12      buffer = io.StringIO(); writer = csv.DictWriter(buffer, fieldnames=["id", "title", "status", "priority", "due_date", "labels"])
+backend/app/routers/exports.py:   13      writer.writeheader(); writer.writerows(rows("SELECT id, title, status, priority, due_date, labels FROM tasks ORDER BY id"))
+backend/app/routers/exports.py:   14      return StreamingResponse(iter([buffer.getvalue()]), media_type="text/csv", headers={"Content-Disposition": "attachment; filename=flowtask-tasks.csv"})
+backend/app/routers/labels.py:    1  from fastapi import APIRouter
+backend/app/routers/labels.py:    2  from ..db import connect
+backend/app/routers/labels.py:    3  from ..models import LabelInput
+backend/app/routers/labels.py:    4  from ..services import rows
+backend/app/routers/labels.py:    5  
+backend/app/routers/labels.py:    6  router = APIRouter(tags=["labels"])
+backend/app/routers/labels.py:    7  
+backend/app/routers/labels.py:    8  
+backend/app/routers/labels.py:    9  @router.get("/labels")
+backend/app/routers/labels.py:   10  def list_labels() -> list[dict]:
+backend/app/routers/labels.py:   11      return rows("SELECT * FROM labels ORDER BY name")
+backend/app/routers/labels.py:   12  
+backend/app/routers/labels.py:   13  
+backend/app/routers/labels.py:   14  @router.post("/labels")
+backend/app/routers/labels.py:   15  def create_label(payload: LabelInput) -> dict:
+backend/app/routers/labels.py:   16      with connect() as db:
+backend/app/routers/labels.py:   17          cursor = db.execute("INSERT INTO labels (name, color) VALUES (?, ?)", (payload.name, payload.color))
+backend/app/routers/labels.py:   18      return {"id": cursor.lastrowid, **payload.model_dump()}
+backend/app/routers/logs.py:    1  from fastapi import APIRouter
+backend/app/routers/logs.py:    2  from ..services import rows
+backend/app/routers/logs.py:    3  
+backend/app/routers/logs.py:    4  router = APIRouter(tags=["operation-logs"])
+backend/app/routers/logs.py:    5  
+backend/app/routers/logs.py:    6  
+backend/app/routers/logs.py:    7  @router.get("/operation-logs")
+backend/app/routers/logs.py:    8  def operation_logs() -> list[dict]:
+backend/app/routers/logs.py:    9      return rows("SELECT * FROM activity_logs ORDER BY id DESC LIMIT 50")
+backend/app/routers/priorities.py:    1  from fastapi import APIRouter
+backend/app/routers/priorities.py:    2  
+backend/app/routers/priorities.py:    3  router = APIRouter(tags=["priorities"])
+backend/app/routers/priorities.py:    4  
+backend/app/routers/priorities.py:    5  
+
+
+
+FlowTask个人任务与项目管理系统 V1.0
+第 4 页
+backend/app/routers/priorities.py:    6  @router.get("/priorities")
+backend/app/routers/priorities.py:    7  def list_priorities() -> list[dict]:
+backend/app/routers/priorities.py:    8      return [{"name": "高", "color": "#c0392b"}, {"name": "中", "color": "#e67e22"}, {"name": "低", "color": "#2f6756"}]
+backend/app/routers/projects.py:    1  from fastapi import APIRouter
+backend/app/routers/projects.py:    2  from ..db import connect
+backend/app/routers/projects.py:    3  from ..models import ProjectInput
+backend/app/routers/projects.py:    4  from ..services import log, rows
+backend/app/routers/projects.py:    5  
+backend/app/routers/projects.py:    6  router = APIRouter(tags=["projects"])
+backend/app/routers/projects.py:    7  
+backend/app/routers/projects.py:    8  
+backend/app/routers/projects.py:    9  @router.get("/projects")
+backend/app/routers/projects.py:   10  def list_projects() -> list[dict]:
+backend/app/routers/projects.py:   11      return rows("SELECT * FROM projects ORDER BY id DESC")
+backend/app/routers/projects.py:   12  
+backend/app/routers/projects.py:   13  
+backend/app/routers/projects.py:   14  @router.post("/projects")
+backend/app/routers/projects.py:   15  def create_project(payload: ProjectInput) -> dict:
+backend/app/routers/projects.py:   16      with connect() as db:
+backend/app/routers/projects.py:   17          cursor = db.execute("INSERT INTO projects (name, status, color) VALUES (?, ?, ?)", (payload.name, payload.status, payload.color))
+backend/app/routers/projects.py:   18      log(f"创建项目：{payload.name}")
+backend/app/routers/projects.py:   19      return {"id": cursor.lastrowid, **payload.model_dump()}
+backend/app/routers/search.py:    1  from fastapi import APIRouter
+backend/app/routers/search.py:    2  from ..services import rows
+backend/app/routers/search.py:    3  
+backend/app/routers/search.py:    4  router = APIRouter(tags=["search"])
+backend/app/routers/search.py:    5  
+backend/app/routers/search.py:    6  
+backend/app/routers/search.py:    7  @router.get("/search")
+backend/app/routers/search.py:    8  def search(q: str) -> dict:
+backend/app/routers/search.py:    9      return {"projects": rows("SELECT * FROM projects WHERE name LIKE ?", (f"%{q}%",)), "tasks": rows("SELECT * FROM tasks WHERE title LIKE ? OR labels LIKE ?", (f"%{q}%", f"%{q}%"))}
+backend/app/routers/settings.py:    1  from fastapi import APIRouter
+backend/app/routers/settings.py:    2  from ..db import connect
+backend/app/routers/settings.py:    3  from ..models import SettingInput
+backend/app/routers/settings.py:    4  from ..services import rows
+backend/app/routers/settings.py:    5  
+backend/app/routers/settings.py:    6  router = APIRouter(tags=["settings"])
+backend/app/routers/settings.py:    7  
+backend/app/routers/settings.py:    8  
+backend/app/routers/settings.py:    9  @router.get("/settings")
+backend/app/routers/settings.py:   10  def list_settings() -> list[dict]:
+backend/app/routers/settings.py:   11      return rows("SELECT * FROM settings ORDER BY key")
+backend/app/routers/settings.py:   12  
+backend/app/routers/settings.py:   13  
+backend/app/routers/settings.py:   14  @router.put("/settings/{key}")
+backend/app/routers/settings.py:   15  def update_setting(key: str, payload: SettingInput) -> dict:
+backend/app/routers/settings.py:   16      with connect() as db:
+backend/app/routers/settings.py:   17          db.execute("INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (key, payload.value))
+backend/app/routers/settings.py:   18      return {"key": key, "value": payload.value}
+backend/app/routers/stats.py:    1  from fastapi import APIRouter
+
+
+
+FlowTask个人任务与项目管理系统 V1.0
+第 5 页
+backend/app/routers/stats.py:    2  from ..services import rows, task_metrics
+backend/app/routers/stats.py:    3  
+backend/app/routers/stats.py:    4  router = APIRouter(tags=["statistics"])
+backend/app/routers/stats.py:    5  
+backend/app/routers/stats.py:    6  
+backend/app/routers/stats.py:    7  @router.get("/statistics")
+backend/app/routers/stats.py:    8  def statistics() -> dict:
+backend/app/routers/stats.py:    9      return {"metrics": task_metrics(), "by_status": rows("SELECT status, COUNT(*) AS count FROM tasks GROUP BY status"), "by_priority": rows("SELECT priority, COUNT(*) AS count FROM tasks GROUP BY priority")}
+backend/app/routers/statuses.py:    1  from fastapi import APIRouter
+backend/app/routers/statuses.py:    2  
+backend/app/routers/statuses.py:    3  router = APIRouter(tags=["task-status"])
+backend/app/routers/statuses.py:    4  
+backend/app/routers/statuses.py:    5  
+backend/app/routers/statuses.py:    6  @router.get("/task-statuses")
+backend/app/routers/statuses.py:    7  def list_statuses() -> list[dict]:
+backend/app/routers/statuses.py:    8      return [{"name": "待办", "order": 1}, {"name": "进行中", "order": 2}, {"name": "已完成", "order": 3}]
+backend/app/routers/tasks.py:    1  from typing import Optional
+backend/app/routers/tasks.py:    2  
+backend/app/routers/tasks.py:    3  from fastapi import APIRouter
+backend/app/routers/tasks.py:    4  from ..db import connect
+backend/app/routers/tasks.py:    5  from ..models import TaskInput
+backend/app/routers/tasks.py:    6  from ..services import log, rows
+backend/app/routers/tasks.py:    7  
+backend/app/routers/tasks.py:    8  router = APIRouter(tags=["tasks"])
+backend/app/routers/tasks.py:    9  
+backend/app/routers/tasks.py:   10  
+backend/app/routers/tasks.py:   11  @router.get("/tasks")
+backend/app/routers/tasks.py:   12  def list_tasks(status: Optional[str] = None, q: Optional[str] = None) -> list[dict]:
+backend/app/routers/tasks.py:   13      query, values = "SELECT * FROM tasks WHERE 1=1", []
+backend/app/routers/tasks.py:   14      if status:
+backend/app/routers/tasks.py:   15          query += " AND status = ?"; values.append(status)
+backend/app/routers/tasks.py:   16      if q:
+backend/app/routers/tasks.py:   17          query += " AND title LIKE ?"; values.append(f"%{q}%")
+backend/app/routers/tasks.py:   18      return rows(query + " ORDER BY id DESC", tuple(values))
+backend/app/routers/tasks.py:   19  
+backend/app/routers/tasks.py:   20  
+backend/app/routers/tasks.py:   21  @router.post("/tasks")
+backend/app/routers/tasks.py:   22  def create_task(payload: TaskInput) -> dict:
+backend/app/routers/tasks.py:   23      with connect() as db:
+backend/app/routers/tasks.py:   24          cursor = db.execute("INSERT INTO tasks (project_id, title, status, priority, due_date, labels) VALUES (?, ?, ?, ?, ?, ?)", (payload.project_id, payload.title, payload.status, payload.priority, payload.due_date, payload.labels))
+backend/app/routers/tasks.py:   25      log(f"创建任务：{payload.title}")
+backend/app/routers/tasks.py:   26      return {"id": cursor.lastrowid, **payload.model_dump()}
+backend/app/services.py:    1  from .db import connect
+backend/app/services.py:    2  
+backend/app/services.py:    3  
+backend/app/services.py:    4  def rows(query: str, parameters: tuple = ()) -> list[dict]:
+backend/app/services.py:    5      with connect() as db:
+backend/app/services.py:    6          return [dict(row) for row in db.execute(query, parameters).fetchall()]
+backend/app/services.py:    7  
+backend/app/services.py:    8  
+
+
+
+FlowTask个人任务与项目管理系统 V1.0
+第 6 页
+backend/app/services.py:    9  def log(action: str) -> None:
+backend/app/services.py:   10      with connect() as db:
+backend/app/services.py:   11          db.execute("INSERT INTO activity_logs (action, created_at) VALUES (?, datetime('now'))", (action,))
+backend/app/services.py:   12  
+backend/app/services.py:   13  
+backend/app/services.py:   14  def task_metrics() -> dict:
+backend/app/services.py:   15      items = rows("SELECT status, priority FROM tasks")
+backend/app/services.py:   16      return {"total": len(items), "done": sum(item["status"] == "已完成" for item in items), "high_priority": sum(item["priority"] == "高" for item in items)}
+frontend/src/App.vue:    1  <script setup lang="ts">
+frontend/src/App.vue:    2  const nav = [["/", "工作台"], ["/projects", "项目"], ["/tasks", "任务"], ["/labels", "标签"], ["/statistics", "统计"], ["/settings", "设置"]];
+frontend/src/App.vue:    3  </script>
+frontend/src/App.vue:    4  <template><div class="shell"><aside><strong>FlowTask</strong><small>个人任务与项目管理</small><RouterLink v-for="item in nav" :key="item[0]" :to="item[0]">{{ item[1] }}</RouterLink></aside><main><RouterView /></main></div></template>
+frontend/src/router.ts:    1  import { createRouter, createWebHistory } from "vue-router";
+frontend/src/router.ts:    2  import LoginView from "./views/LoginView.vue";
+frontend/src/router.ts:    3  import DashboardView from "./views/DashboardView.vue";
+frontend/src/router.ts:    4  import ProjectsView from "./views/ProjectsView.vue";
+frontend/src/router.ts:    5  import TasksView from "./views/TasksView.vue";
+frontend/src/router.ts:    6  import StatusesView from "./views/StatusesView.vue";
+frontend/src/router.ts:    7  import PrioritiesView from "./views/PrioritiesView.vue";
+frontend/src/router.ts:    8  import LabelsView from "./views/LabelsView.vue";
+frontend/src/router.ts:    9  import SearchView from "./views/SearchView.vue";
+frontend/src/router.ts:   10  import StatisticsView from "./views/StatisticsView.vue";
+frontend/src/router.ts:   11  import LogsView from "./views/LogsView.vue";
+frontend/src/router.ts:   12  import SettingsView from "./views/SettingsView.vue";
+frontend/src/router.ts:   13  import ExportsView from "./views/ExportsView.vue";
+frontend/src/router.ts:   14  
+frontend/src/router.ts:   15  export default createRouter({ history: createWebHistory(), routes: [
+frontend/src/router.ts:   16    { path: "/login", component: LoginView }, { path: "/", component: DashboardView },
+frontend/src/router.ts:   17    { path: "/projects", component: ProjectsView }, { path: "/tasks", component: TasksView },
+frontend/src/router.ts:   18    { path: "/statuses", component: StatusesView }, { path: "/priorities", component: PrioritiesView },
+frontend/src/router.ts:   19    { path: "/labels", component: LabelsView }, { path: "/search", component: SearchView },
+frontend/src/router.ts:   20    { path: "/statistics", component: StatisticsView }, { path: "/logs", component: LogsView },
+frontend/src/router.ts:   21    { path: "/settings", component: SettingsView }, { path: "/exports", component: ExportsView },
+frontend/src/router.ts:   22  ] });
+frontend/src/views/DashboardView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const data=ref<{metrics:{total:number;done:number;high_priority:number}}|null>(null);onMounted(async()=>data.value=await get("/dashboard"));</script><template><h1>工作台</h1><p class="muted">查看今日任务与项目概览。</p><div v-if="data" class="metrics"><div class="metric">全部任务<br><strong>{{data.metrics.total}}</strong></div><div class="metric">已完成<br><strong>{{data.metrics.done}}</strong></div><div class="metric">高优先级<br><strong>{{data.metrics.high_priority}}</strong></div></div></template>
+frontend/src/views/ExportsView.vue:    1  <script setup lang="ts">const url="http://localhost:8000/api/exports/tasks";</script><template><h1>数据导出</h1><div class="panel"><p>将当前任务数据导出为 CSV 文件。</p><a :href="url"><button>导出任务 CSV</button></a></div></template>
+frontend/src/views/LabelsView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get,post}from"../api";const labels=ref<any[]>([]),name=ref("");async function load(){labels.value=await get("/labels")}async function add(){await post("/labels",{name:name.value});name.value="";load()}onMounted(load);</script><template><h1>标签管理</h1><div class="row"><input v-model="name" placeholder="标签名称"><button @click="add">新建标签</button></div><div class="panel" v-for="label in labels" :key="label.id"><span :style="{color:label.color}">●</span> {{label.name}}</div></template>
+frontend/src/views/LoginView.vue:    1  <script setup lang="ts">import { ref } from "vue"; import { post } from "../api"; const email=ref(""), password=ref(""), message=ref(""); async function submit(){const result=await post<{user:{name:string}}>("/auth/login",{email:email.value,password:password.value});message.value=`欢迎，${result.user.name}`;}</script><template><h1>登录 FlowTask</h1><div class="panel"><div class="row"><input v-model="email" aria-label="邮箱"><input v-model="password" type="password" aria-label="密码"><button @click="submit">登录</button></div><p>{{message}}</p></div></template>
+frontend/src/views/LogsView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const logs=ref<any[]>([]);onMounted(async()=>logs.value=await get("/operation-logs"));</script><template><h1>操作日志</h1><div class="panel" v-for="log in logs" :key="log.id">{{log.created_at}} · {{log.action}}</div></template>
+frontend/src/views/PrioritiesView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const priorities=ref<any[]>([]);onMounted(async()=>priorities.value=await get("/priorities"));</script><template><h1>优先级管理</h1><div class="panel" v-for="priority in priorities" :key="priority.name"><span :style="{color:priority.color}">●</span> {{priority.name}}</div></template>
+frontend/src/views/ProjectsView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get,post}from"../api";const projects=ref<any[]>([]),name=ref("");async function load(){projects.value=await get("/projects")}async function add(){await post("/projects",{name:name.value});name.value="";load()}onMounted(load);</script><template><h1>项目管理</h1><div class="row"><input v-model="name" placeholder="项目名称"><button @click="add">新建项目</button></div><div class="panel" v-for="project in projects" :key="project.id"><strong>{{project.name}}</strong> · {{project.status}}</div></template>
+frontend/src/views/SearchView.vue:    1  <script setup lang="ts">import{ref}from"vue";import{get}from"../api";const q=ref(""),result=ref<any>(null);async function search(){result.value=await get(`/search?q=${encodeURIComponent(q.value)}`)}</script><template><h1>搜索与过滤</h1><div class="row"><input v-model="q" placeholder="搜索项目、任务或标签"><button @click="search">搜索</button></div><div v-if="result" class="panel">项目 {{result.projects.length}} 个，任务 {{result.tasks.length}} 个</div></template>
+frontend/src/views/SettingsView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const settings=ref<any[]>([]);onMounted(async()=>settings.value=await get("/settings"));</script><template><h1>用户设置</h1><div class="panel" v-for="setting in settings" :key="setting.key">{{setting.key}}：{{setting.value}}</div></template>
+frontend/src/views/StatisticsView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const data=ref<any>(null);onMounted(async()=>data.value=await get("/statistics"));</script><template><h1>数据统计</h1><div v-if="data" class="metrics"><div class="metric">任务总数 {{data.metrics.total}}</div><div class="metric">完成 {{data.metrics.done}}</div><div class="metric">高优先级 {{data.metrics.high_priority}}</div></div></template>
+frontend/src/views/StatusesView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get}from"../api";const statuses=ref<any[]>([]);onMounted(async()=>statuses.value=await get("/task-statuses"));</script><template><h1>任务状态管理</h1><div class="panel" v-for="status in statuses" :key="status.name">{{status.order}}. {{status.name}}</div></template>
+frontend/src/views/TasksView.vue:    1  <script setup lang="ts">import{onMounted,ref}from"vue";import{get,post}from"../api";const tasks=ref<any[]>([]),title=ref(""),status=ref("");async function load(){tasks.value=await get(`/tasks${status.value?`?status=${status.value}`:""}`)}async function add(){await post("/tasks",{title:title.value,priority:"中"});title.value="";load()}onMounted(load);</script><template><h1>任务管理</h1><div class="row"><input v-model="title" placeholder="任务标题"><button @click="add">添加任务</button><select v-model="status" @change="load"><option value="">全部状态</option><option>待办</option><option>进行中</option><option>已完成</option></select></div><div class="panel" v-for="task in tasks" :key="task.id">{{task.title}} · {{task.status}} · {{task.priority}}</div></template>
+frontend/src/api.ts:    1  const base = "http://localhost:8000/api";
+frontend/src/api.ts:    2  
+frontend/src/api.ts:    3  export async function get<T>(path: string): Promise<T> {
+frontend/src/api.ts:    4    const response = await fetch(`${base}${path}`);
+
+
+
+FlowTask个人任务与项目管理系统 V1.0
+第 7 页
+frontend/src/api.ts:    5    if (!response.ok) throw new Error("FlowTask API 请求失败");
+frontend/src/api.ts:    6    return response.json() as Promise<T>;
+frontend/src/api.ts:    7  }
+frontend/src/api.ts:    8  
+frontend/src/api.ts:    9  export async function post<T>(path: string, payload: unknown): Promise<T> {
+frontend/src/api.ts:   10    const response = await fetch(`${base}${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+frontend/src/api.ts:   11    if (!response.ok) throw new Error("FlowTask API 请求失败");
+frontend/src/api.ts:   12    return response.json() as Promise<T>;
+frontend/src/api.ts:   13  }
+frontend/vite.config.ts:    1  import { defineConfig } from "vite";
+frontend/vite.config.ts:    2  import vue from "@vitejs/plugin-vue";
+frontend/vite.config.ts:    3  
+frontend/vite.config.ts:    4  export default defineConfig({ plugins: [vue()] });

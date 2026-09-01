@@ -1,0 +1,71 @@
+{
+  "project": "/Users/xuanxuanzi/home/s/javapub/copyright-forge-skill/examples/flowtask-demo/project",
+  "file_count": 41,
+  "source_file_count": 35,
+  "languages": [
+    "Python",
+    "TypeScript",
+    "Vue"
+  ],
+  "markers": [
+    {
+      "file": "package.json",
+      "meaning": "Node.js"
+    },
+    {
+      "file": "requirements.txt",
+      "meaning": "Python requirements"
+    },
+    {
+      "file": "vite.config.ts",
+      "meaning": "Vite"
+    }
+  ],
+  "extension_counts": {
+    ".css": 1,
+    ".html": 1,
+    ".json": 2,
+    ".md": 1,
+    ".py": 18,
+    ".ts": 4,
+    ".txt": 1,
+    ".vue": 13
+  },
+  "source_files": [
+    "backend/app/__init__.py",
+    "backend/app/db.py",
+    "backend/app/main.py",
+    "backend/app/models.py",
+    "backend/app/services.py",
+    "backend/app/routers/__init__.py",
+    "backend/app/routers/auth.py",
+    "backend/app/routers/dashboard.py",
+    "backend/app/routers/exports.py",
+    "backend/app/routers/labels.py",
+    "backend/app/routers/logs.py",
+    "backend/app/routers/priorities.py",
+    "backend/app/routers/projects.py",
+    "backend/app/routers/search.py",
+    "backend/app/routers/settings.py",
+    "backend/app/routers/stats.py",
+    "backend/app/routers/statuses.py",
+    "backend/app/routers/tasks.py",
+    "frontend/vite.config.ts",
+    "frontend/src/App.vue",
+    "frontend/src/api.ts",
+    "frontend/src/main.ts",
+    "frontend/src/router.ts",
+    "frontend/src/views/DashboardView.vue",
+    "frontend/src/views/ExportsView.vue",
+    "frontend/src/views/LabelsView.vue",
+    "frontend/src/views/LoginView.vue",
+    "frontend/src/views/LogsView.vue",
+    "frontend/src/views/PrioritiesView.vue",
+    "frontend/src/views/ProjectsView.vue",
+    "frontend/src/views/SearchView.vue",
+    "frontend/src/views/SettingsView.vue",
+    "frontend/src/views/StatisticsView.vue",
+    "frontend/src/views/StatusesView.vue",
+    "frontend/src/views/TasksView.vue"
+  ]
+}

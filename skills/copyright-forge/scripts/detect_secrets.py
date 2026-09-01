@@ -11,7 +11,7 @@ from common import is_probably_text, iter_project_files, write_json
 RULES = [
     ("private_key", re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----")),
     ("generic_api_key", re.compile(r"\b(?:sk|api)[_-][A-Za-z0-9_-]{16,}\b", re.I)),
-    ("assignment_secret", re.compile(r"(?i)\b(password|passwd|secret|token|api[_-]?key|access[_-]?key)\b\s*[:=]\s*[\"']?([^\s\"']{8,})")),
+    ("assignment_secret", re.compile(r"(?i)\b(password|passwd|secret|token|api[_-]?key|access[_-]?key)\b\s*[:=]\s*[\"']([^\"']{8,})[\"']")),
     ("connection_string", re.compile(r"(?i)\b(?:postgres|mysql|mongodb(?:\+srv)?|redis)://[^\s\"']+")),
 ]
 

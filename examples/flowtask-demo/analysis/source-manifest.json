@@ -1,0 +1,148 @@
+{
+  "project": "/Users/xuanxuanzi/home/s/javapub/copyright-forge-skill/examples/flowtask-demo/project",
+  "selection_rule": "deterministic core-code ranking; review before final pagination",
+  "files": [
+    {
+      "path": "backend/app/main.py",
+      "lines": 17
+    },
+    {
+      "path": "frontend/src/main.ts",
+      "lines": 6
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "lines": 1
+    },
+    {
+      "path": "backend/app/db.py",
+      "lines": 27
+    },
+    {
+      "path": "backend/app/models.py",
+      "lines": 32
+    },
+    {
+      "path": "backend/app/routers/__init__.py",
+      "lines": 1
+    },
+    {
+      "path": "backend/app/routers/auth.py",
+      "lines": 11
+    },
+    {
+      "path": "backend/app/routers/dashboard.py",
+      "lines": 9
+    },
+    {
+      "path": "backend/app/routers/exports.py",
+      "lines": 14
+    },
+    {
+      "path": "backend/app/routers/labels.py",
+      "lines": 18
+    },
+    {
+      "path": "backend/app/routers/logs.py",
+      "lines": 9
+    },
+    {
+      "path": "backend/app/routers/priorities.py",
+      "lines": 8
+    },
+    {
+      "path": "backend/app/routers/projects.py",
+      "lines": 19
+    },
+    {
+      "path": "backend/app/routers/search.py",
+      "lines": 9
+    },
+    {
+      "path": "backend/app/routers/settings.py",
+      "lines": 18
+    },
+    {
+      "path": "backend/app/routers/stats.py",
+      "lines": 9
+    },
+    {
+      "path": "backend/app/routers/statuses.py",
+      "lines": 8
+    },
+    {
+      "path": "backend/app/routers/tasks.py",
+      "lines": 26
+    },
+    {
+      "path": "backend/app/services.py",
+      "lines": 16
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "lines": 4
+    },
+    {
+      "path": "frontend/src/router.ts",
+      "lines": 22
+    },
+    {
+      "path": "frontend/src/views/DashboardView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/ExportsView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/LabelsView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/LoginView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/LogsView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/PrioritiesView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/ProjectsView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/SearchView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/SettingsView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/StatisticsView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/StatusesView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/views/TasksView.vue",
+      "lines": 1
+    },
+    {
+      "path": "frontend/src/api.ts",
+      "lines": 13
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "lines": 4
+    }
+  ],
+  "total_lines": 313,
+  "ordinary_deposit_note": "Apply current official continuity and page-count requirements when formatting final materials."
+}

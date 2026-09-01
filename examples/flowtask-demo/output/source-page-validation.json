@@ -1,0 +1,11 @@
+{
+  "status": "READY",
+  "blockers": [],
+  "warnings": [],
+  "info": [
+    {
+      "available_pages": 7,
+      "included_pages": 7
+    }
+  ]
+}

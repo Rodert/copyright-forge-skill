@@ -1,0 +1,10 @@
+{
+  "status": "READY",
+  "blockers": [],
+  "warnings": [],
+  "info": [
+    {
+      "rules_version": "2026.08"
+    }
+  ]
+}

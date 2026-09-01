@@ -12,7 +12,7 @@ from common import write_json
 
 
 def key_for(item: dict) -> str:
-    stem = Path(str(item.get("id", ""))).stem.lower()
+    stem = str(item.get("name", item.get("id", ""))).lower()
     stem = re.sub(r"(?:controller|service|handler|repository|model|view|page|api)$", "", stem)
     return re.sub(r"[^a-z0-9]+", "-", stem).strip("-") or str(item.get("id", "feature"))
 

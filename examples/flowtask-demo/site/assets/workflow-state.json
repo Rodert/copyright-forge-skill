@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "state": "READY",
+  "project": "/Users/xuanxuanzi/home/s/javapub/copyright-forge-skill/examples/flowtask-demo/project",
+  "project_snapshot": "2d4dae6460e0d36c96d13ea639f2a708c7e80177c0d7165aad5bb8dc5bcfc062",
+  "facts_fingerprint": "60e75c65e0a4c7fc1ef76455dd290f74319c8b35565e792bc7ca920631b0c57a",
+  "history": [
+    {
+      "state": "ANALYZING",
+      "reason": "task initialized"
+    },
+    {
+      "state": "FACTS_LOCKED",
+      "reason": "confirmed facts locked"
+    },
+    {
+      "state": "GENERATING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "REVIEWING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "NEEDS_FIX",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "ANALYZING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "FACTS_LOCKED",
+      "reason": "confirmed facts locked"
+    },
+    {
+      "state": "GENERATING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "REVIEWING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "READY",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "ANALYZING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "FACTS_LOCKED",
+      "reason": "confirmed facts locked"
+    },
+    {
+      "state": "GENERATING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "REVIEWING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "READY",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "ANALYZING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "FACTS_LOCKED",
+      "reason": "confirmed facts locked"
+    },
+    {
+      "state": "GENERATING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "REVIEWING",
+      "reason": "workflow transition"
+    },
+    {
+      "state": "READY",
+      "reason": "workflow transition"
+    }
+  ],
+  "updated_at": "2026-09-01T12:52:15+00:00"
+}

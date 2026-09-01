@@ -62,6 +62,11 @@ def load_profile(path: Path) -> dict[str, Any]:
             stack.append((indent, node))
         elif value == "[]":
             parent[key] = []
+        elif value.startswith("[") and value.endswith("]"):
+            try:
+                parent[key] = json.loads(value)
+            except json.JSONDecodeError:
+                parent[key] = value
         elif value.lower() in {"true", "false"}:
             parent[key] = value.lower() == "true"
         else:

@@ -1,0 +1,495 @@
+{
+  "schema_version": "2.0",
+  "project": "/Users/xuanxuanzi/home/s/javapub/copyright-forge-skill/examples/flowtask-demo/project",
+  "features": [
+    {
+      "id": "backend-app-db-py",
+      "name": "db",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "model",
+          "path": "backend/app/db.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/db.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-main-py",
+      "name": "main",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "source_code",
+          "path": "backend/app/main.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-models-py",
+      "name": "models",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "model",
+          "path": "backend/app/models.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/models.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-services-py",
+      "name": "services",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "source_code",
+          "path": "backend/app/services.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-auth-py",
+      "name": "auth",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/auth.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/auth.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-dashboard-py",
+      "name": "dashboard",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/dashboard.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/dashboard.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-exports-py",
+      "name": "exports",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/exports.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/exports.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-labels-py",
+      "name": "labels",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/labels.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/labels.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-logs-py",
+      "name": "logs",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/logs.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/logs.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-priorities-py",
+      "name": "priorities",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/priorities.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/priorities.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-projects-py",
+      "name": "projects",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/projects.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/projects.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-search-py",
+      "name": "search",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/search.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/search.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-settings-py",
+      "name": "settings",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/settings.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/settings.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-stats-py",
+      "name": "stats",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/stats.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/stats.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-statuses-py",
+      "name": "statuses",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/statuses.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/statuses.py"
+        }
+      ]
+    },
+    {
+      "id": "backend-app-routers-tasks-py",
+      "name": "tasks",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "backend/app/routers/tasks.py"
+        },
+        {
+          "type": "source_code",
+          "path": "backend/app/routers/tasks.py"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-App-vue",
+      "name": "App",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/App.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-api-ts",
+      "name": "api",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "source_code",
+          "path": "frontend/src/api.ts"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-router-ts",
+      "name": "router",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/router.ts"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-DashboardView-vue",
+      "name": "DashboardView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/DashboardView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/DashboardView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-ExportsView-vue",
+      "name": "ExportsView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/views/ExportsView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-LabelsView-vue",
+      "name": "LabelsView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/LabelsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/LabelsView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/LabelsView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-LoginView-vue",
+      "name": "LoginView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "page",
+          "path": "frontend/src/views/LoginView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/LoginView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-LogsView-vue",
+      "name": "LogsView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/LogsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/LogsView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-PrioritiesView-vue",
+      "name": "PrioritiesView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/PrioritiesView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/PrioritiesView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-ProjectsView-vue",
+      "name": "ProjectsView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/ProjectsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/ProjectsView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/ProjectsView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-SearchView-vue",
+      "name": "SearchView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/SearchView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/SearchView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/SearchView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-SettingsView-vue",
+      "name": "SettingsView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/SettingsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/SettingsView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-StatisticsView-vue",
+      "name": "StatisticsView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/StatisticsView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/StatisticsView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-StatusesView-vue",
+      "name": "StatusesView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/StatusesView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/StatusesView.vue"
+        }
+      ]
+    },
+    {
+      "id": "frontend-src-views-TasksView-vue",
+      "name": "TasksView",
+      "claim_status": "candidate",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "type": "route",
+          "path": "frontend/src/views/TasksView.vue"
+        },
+        {
+          "type": "page",
+          "path": "frontend/src/views/TasksView.vue"
+        },
+        {
+          "type": "source_code",
+          "path": "frontend/src/views/TasksView.vue"
+        }
+      ]
+    }
+  ],
+  "note": "Candidate evidence only. A document claim must cite a feature id and at least one listed project path; confirm its user-facing name before writing."
+}

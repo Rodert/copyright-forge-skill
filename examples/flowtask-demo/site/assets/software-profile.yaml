@@ -1,0 +1,79 @@
+schema_version: "2.0"
+software:
+  full_name:
+    value: "FlowTask个人任务与项目管理系统"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  short_name:
+    value: "FlowTask"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  version:
+    value: "V1.0"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  type:
+    value: "个人任务与项目管理软件"
+    source: ["project/frontend/src/router.ts", "project/backend/app/main.py"]
+    confidence: high
+    requires_confirmation: false
+    status: inferred
+technology:
+  frontend: ["Vue 3", "TypeScript", "Vite"]
+  backend: ["FastAPI"]
+  database: ["SQLite"]
+  languages: ["TypeScript", "Python"]
+features: ["backend-app-db-py", "backend-app-main-py", "backend-app-models-py", "backend-app-services-py", "backend-app-routers-auth-py", "backend-app-routers-dashboard-py", "backend-app-routers-exports-py", "backend-app-routers-labels-py", "backend-app-routers-logs-py", "backend-app-routers-priorities-py", "backend-app-routers-projects-py", "backend-app-routers-search-py", "backend-app-routers-settings-py", "backend-app-routers-stats-py", "backend-app-routers-statuses-py", "backend-app-routers-tasks-py", "frontend-src-api-ts", "frontend-src-views-DashboardView-vue", "frontend-src-views-ExportsView-vue", "frontend-src-views-LabelsView-vue", "frontend-src-views-LoginView-vue", "frontend-src-views-LogsView-vue", "frontend-src-views-PrioritiesView-vue", "frontend-src-views-ProjectsView-vue", "frontend-src-views-SearchView-vue", "frontend-src-views-SettingsView-vue", "frontend-src-views-StatisticsView-vue", "frontend-src-views-StatusesView-vue", "frontend-src-views-TasksView-vue"]
+applicant:
+  value: "FlowTask Demo Studio（公开测试数据，非真实主体）"
+  source: ["user-confirmations.json"]
+  confidence: high
+  requires_confirmation: true
+  status: confirmed
+copyright:
+  development_method:
+    value: "独立开发"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  rights_acquisition:
+    value: "原始取得"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  rights_scope:
+    value: "全部权利"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+dates:
+  completion_date:
+    value: "2026-08-15（Demo Data）"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  publication_status:
+    value: "未发表"
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: true
+    status: confirmed
+  first_publication_date:
+    value: ""
+    source: ["user-confirmations.json"]
+    confidence: high
+    requires_confirmation: false
+    status: confirmed
+status:
+  profile_confirmed: true
+  facts_locked: false

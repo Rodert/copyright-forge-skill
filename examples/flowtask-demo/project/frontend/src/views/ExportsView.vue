@@ -1,0 +1,1 @@
+<script setup lang="ts">const url="http://localhost:8000/api/exports/tasks";</script><template><h1>数据导出</h1><div class="panel"><p>将当前任务数据导出为 CSV 文件。</p><a :href="url"><button>导出任务 CSV</button></a></div></template>

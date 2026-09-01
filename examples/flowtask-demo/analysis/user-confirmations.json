@@ -1,0 +1,15 @@
+{
+  "demo_notice": "All applicant and date values are public demo data, not real identity information.",
+  "confirmed_at": "2026-09-01T10:00:00+08:00",
+  "answers": {
+    "software_full_name": "FlowTask个人任务与项目管理系统",
+    "software_short_name": "FlowTask",
+    "version": "V1.0",
+    "applicant": "FlowTask Demo Studio（公开测试数据，非真实主体）",
+    "development_method": "独立开发",
+    "rights_acquisition": "原始取得",
+    "rights_scope": "全部权利",
+    "completion_date": "2026-08-15（Demo Data）",
+    "publication_status": "未发表"
+  }
+}

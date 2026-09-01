@@ -1,0 +1,21 @@
+{
+  "rules_version": "2026.08",
+  "status": "READY",
+  "blockers": [],
+  "warnings": [],
+  "info": [
+    {
+      "checked_files": [
+        "application-info.md",
+        "software-manual.md"
+      ]
+    },
+    {
+      "evidence_backed_feature_count": 29
+    },
+    {
+      "available_pages": 7,
+      "included_pages": 7
+    }
+  ]
+}

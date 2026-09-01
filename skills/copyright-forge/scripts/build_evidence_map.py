@@ -10,6 +10,7 @@ from common import SOURCE_EXTENSIONS, is_probably_text, iter_project_files, writ
 
 PATTERNS = [
     ("route", re.compile(r"\b(GET|POST|PUT|PATCH|DELETE)\s*\(|\b(router|app)\.(get|post|put|patch|delete)\b|\bhttp\.Handle(?:Func)?\s*\(", re.I)),
+    ("page", re.compile(r"<template\b|\bcreateRouter\s*\(", re.I)),
     ("model", re.compile(r"\b(class|struct|type)\s+\w+|\bCREATE\s+TABLE\b", re.I)),
     ("handler", re.compile(r"\b(handler|controller|service|repository)\b", re.I)),
     ("source_code", re.compile(r"\bfunc\s+\w+|\bdef\s+\w+|\b(class|function)\s+\w+", re.I)),

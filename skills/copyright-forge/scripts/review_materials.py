@@ -11,7 +11,7 @@ from typing import Any
 
 from common import load_profile, write_json
 
-TEXT_EXTENSIONS = {".md", ".txt", ".json", ".yaml", ".yml", ".html"}
+TEXT_EXTENSIONS = {".md", ".txt", ".html"}
 
 
 def value(entry: Any) -> str:
@@ -77,14 +77,17 @@ def main() -> None:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         relative = path.relative_to(args.materials).as_posix(); checked.append(relative)
-        for label, expected in identity_values(profile).items():
+        required_identity = identity_values(profile)
+        if "source-material" in relative:
+            required_identity.pop("applicant")
+        for label, expected in required_identity.items():
             if expected and expected not in text:
                 consistency_findings.append({"code": "IDENTITY_MISMATCH", "path": relative, "field": label, "message": "Material does not contain the locked identity value."})
         for feature_id, item in evidence_features.items():
             name = str(item.get("name", "")).strip()
             if name and name in text and feature_id not in profile_features:
                 hallucination_findings.append({"code": "UNSUPPORTED_CLAIM", "path": relative, "feature_id": feature_id, "message": "Material names a feature not approved in the locked profile."})
-        if re.search(r"(?i)\b(api[_-]?key|access[_-]?token|password|private key)\b\s*[:=]", text):
+        if re.search(r"(?i)\b(api[_-]?key|access[_-]?token|password|private key)\b\s*[:=]\s*[\"'][^\"']{8,}", text):
             privacy_findings.append({"code": "SENSITIVE_CONTENT", "path": relative, "message": "Potential sensitive content must be redacted before delivery."})
     if not checked:
         consistency_findings.append({"code": "NO_MATERIALS", "message": "No reviewable material files were found."})

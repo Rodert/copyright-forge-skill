@@ -94,6 +94,14 @@ ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copy
 
 任务可以中断。输出目录保存 `software-profile.yaml`、`evidence-map.json`、`workflow-state.json` 与 `user-confirmations.json`；下次说“继续”时会检查项目是否变化并从上次阶段恢复。
 
+## Official Demo
+
+[FlowTask Official Demo](examples/flowtask-demo/) 使用一套真实可运行的 Vue 3 + TypeScript + Vite 与 FastAPI + SQLite 项目，完整记录 Copyright Forge 的实际运行结果。模拟用户只说：
+
+> 帮我给这个项目做一个软著。
+
+项目依次经过 Project Scan、Evidence Map、Feature Graph、用户事实确认、Fact Lock、材料生成与 Independent Review，最终产出 `READY` 的公开测试材料。浏览 [HTML Demo](https://rodert.github.io/copyright-forge-skill/demo/flowtask/) 可查看功能证据、事实锁定、说明书、源程序分页预览和八道质量门；所有身份和日期均明确为公开测试数据。
+
 ## 可靠性边界
 
 - 只基于真实项目和用户确认的事实；没有代码证据的功能不得写入正式材料。
