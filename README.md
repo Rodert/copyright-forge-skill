@@ -102,6 +102,31 @@ ln -s ../copyright-forge-repo/skills/copyright-forge "$CF_SKILL_HOME/skills/copy
 
 项目依次经过 Project Scan、Evidence Map、Feature Graph、用户事实确认、Fact Lock、材料生成与 Independent Review，最终产出 `READY` 的公开测试材料。浏览 [HTML Demo](https://rodert.github.io/copyright-forge-skill/demo/flowtask/) 可查看功能证据、事实锁定、说明书、源程序分页预览和八道质量门；所有身份和日期均明确为公开测试数据。
 
+### 运行中的官方 Demo
+
+下面是该 Demo 的实际运行界面。它不是静态设计稿，页面内容直接读取本仓库中由 Copyright Forge 生成的扫描、证据、事实档案、材料和审核产物。
+
+[打开在线 Demo](https://rodert.github.io/copyright-forge-skill/demo/flowtask/)
+
+![FlowTask Demo 概览：从真实代码项目到 READY 的材料流程](docs/assets/flowtask-demo/overview.png)
+
+<details>
+<summary>查看完整运行界面：工作流、证据、事实锁定、材料和审核</summary>
+
+![FlowTask Demo 工作流与真实数据统计](docs/assets/flowtask-demo/workflow-summary.png)
+
+![Evidence Explorer：功能与真实项目证据的对应关系](docs/assets/flowtask-demo/evidence-explorer.png)
+
+![Fact Lock：唯一事实源 software-profile.yaml](docs/assets/flowtask-demo/fact-lock.png)
+
+![软件说明书阅读器](docs/assets/flowtask-demo/software-manual.png)
+
+![源程序鉴别材料分页预览](docs/assets/flowtask-demo/source-material.png)
+
+![Independent Reviewer：八道质量门与最终状态](docs/assets/flowtask-demo/reviewer.png)
+
+</details>
+
 ## 可靠性边界
 
 - 只基于真实项目和用户确认的事实；没有代码证据的功能不得写入正式材料。
